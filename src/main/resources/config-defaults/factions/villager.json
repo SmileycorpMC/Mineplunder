@@ -1,0 +1,15 @@
+{
+	"name": "mineplunder:villager",
+	"default_reputation": 50,
+	"members": [
+		"minecraft:villager",
+		"minecraft:iron_golem",
+		"minecraft:wandering_trader"
+	],
+	"enemies": [
+		"mineplunder:illager",
+		"mineplunder:skeleton",
+		"mineplunder:nether",
+		"mineplunder:piglin"
+	]
+}
