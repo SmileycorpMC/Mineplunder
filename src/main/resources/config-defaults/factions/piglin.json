@@ -1,6 +1,6 @@
 {
 	"name": "mineplunder:piglin",
-	"default_reputation": 50,
+	"default_reputation": 25,
 	"members": [
 		"minecraft:piglin",
 		"minecraft:piglin_brute",
