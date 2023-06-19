@@ -1,9 +1,5 @@
 package net.smileycorp.mineplunder.common.capability;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,10 +7,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import net.smileycorp.mineplunder.api.Faction;
 import net.smileycorp.mineplunder.api.ReputationHandler;
-import net.smileycorp.mineplunder.api.capability.IReputation;
+import net.smileycorp.mineplunder.api.capability.Reputation;
 import net.smileycorp.mineplunder.common.network.SyncReputationMessage;
 
-public class Reputation implements IReputation {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class ReputationImpl implements Reputation {
 
 	private Map<Faction, Integer> FACTIONS = new HashMap<Faction, Integer>();
 

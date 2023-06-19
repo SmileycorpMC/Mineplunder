@@ -1,18 +1,17 @@
 package net.smileycorp.mineplunder.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.smileycorp.mineplunder.common.Mineplunder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Faction {
 
@@ -78,7 +77,7 @@ public class Faction {
 		List<EntityType<?>> members = new ArrayList<EntityType<?>>();
 		for (ResourceLocation loc : parseResourceArray(filename, array)) {
 			try {
-				EntityType<?> entity = ForgeRegistries.ENTITIES.getValue(loc);
+				EntityType<?> entity = ForgeRegistries.ENTITY_TYPES.getValue(loc);
 				members.add(entity);
 			} catch (Exception e) {
 				Mineplunder.logError("Failed to add entry "+ loc + " to faction, entity does not exist " + filename, e);
@@ -109,7 +108,7 @@ public class Faction {
 		builder.append("\"default_reputation\": " + defaultRep + ", ");
 		builder.append("\"members\": [");
 		for (int i = 0; i < members.size(); i++) {
-			builder.append("\""+ members.get(i).getRegistryName().toString() + "\"");
+			builder.append("\""+ members.get(i).toShortString().toString() + "\"");
 			if (i < members.size()-1) builder.append(", ");
 		}
 		builder.append("], ");

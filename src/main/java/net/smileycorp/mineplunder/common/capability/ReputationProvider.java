@@ -5,20 +5,20 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import net.smileycorp.mineplunder.api.ReputationHandler;
-import net.smileycorp.mineplunder.api.capability.IReputation;
+import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
+import net.smileycorp.mineplunder.api.capability.Reputation;
 
 public class ReputationProvider implements ICapabilitySerializable<CompoundTag> {
 
-	private final IReputation impl;
+	private final Reputation impl;
 
 	public ReputationProvider() {
-		impl = new Reputation();
+		impl = new ReputationImpl();
 	}
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-		return cap == ReputationHandler.REPUTATION_CAPABILITY ? LazyOptional.of(() -> impl).cast() : LazyOptional.empty();
+		return cap == MineplunderCapabilities.REPUTATION_CAPABILITY ? LazyOptional.of(() -> impl).cast() : LazyOptional.empty();
 	}
 
 	@Override

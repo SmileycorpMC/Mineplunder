@@ -1,13 +1,8 @@
 package net.smileycorp.mineplunder.common;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -15,43 +10,52 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.smileycorp.mineplunder.api.capability.IReputation;
+import net.smileycorp.mineplunder.api.capability.Reputation;
+import net.smileycorp.mineplunder.api.capability.SoulFire;
 import net.smileycorp.mineplunder.common.capability.ReputationProvider;
+import net.smileycorp.mineplunder.common.capability.SoulFireProvider;
 import net.smileycorp.mineplunder.common.network.PacketHandler;
-import net.smileycorp.mineplunder.config.FactionParser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mod(value = ModDefinitions.MODID)
-@Mod.EventBusSubscriber(modid = ModDefinitions.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+@Mod(value = Constants.MODID)
+@Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Mineplunder {
 
 	public static ScheduledExecutorService DELAYED_THREAD_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
-	private static Logger logger = LogManager.getLogger(ModDefinitions.NAME);
+	private static Logger logger = LogManager.getLogger(Constants.NAME);
+
+	public static Mineplunder INSTANCE;
 
 	public Mineplunder() {
-
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event){
-
 	}
 
 	@SubscribeEvent
 	public static void setup(FMLCommonSetupEvent event){
-		FactionParser.readFactionsFromConfig();
+		//FactionParser.readFactionsFromConfig();
 		PacketHandler.initPackets();
 	}
 
 	@SubscribeEvent
 	public void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.register(IReputation.class);
+		event.register(Reputation.class);
+		event.register(SoulFire.class);
 	}
 
 	@SubscribeEvent
 	public void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
 		Entity entity = event.getObject();
+		event.addCapability(Constants.loc("soulfire"), new SoulFireProvider());
 		if (entity instanceof Player &!(entity instanceof FakePlayer)) {
-			event.addCapability(ModDefinitions.getResource("reputation"), new ReputationProvider());
+			event.addCapability(Constants.loc("reputation"), new ReputationProvider());
 		}
 	}
 

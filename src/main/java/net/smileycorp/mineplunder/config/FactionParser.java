@@ -1,20 +1,19 @@
 package net.smileycorp.mineplunder.config;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-
-import org.apache.commons.io.FileUtils;
-
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.loading.moddiscovery.ModFile;
 import net.smileycorp.mineplunder.api.Faction;
 import net.smileycorp.mineplunder.api.ReputationHandler;
+import net.smileycorp.mineplunder.common.Constants;
 import net.smileycorp.mineplunder.common.Mineplunder;
-import net.smileycorp.mineplunder.common.ModDefinitions;
+import org.apache.commons.io.FileUtils;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 public class FactionParser {
 
@@ -45,7 +44,7 @@ public class FactionParser {
 	}
 
 	private static void createDefaultFiles(File directory) throws Exception {
-		ModFile mod = FMLLoader.getLoadingModList().getModFileById(ModDefinitions.MODID).getFile();
+		ModFile mod = FMLLoader.getLoadingModList().getModFileById(Constants.MODID).getFile();
 		copyFile(mod, directory, "factions/illager.json");
 		copyFile(mod, directory, "factions/nether.json");
 		copyFile(mod, directory, "factions/piglin.json");

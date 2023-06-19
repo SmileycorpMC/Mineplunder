@@ -4,7 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.smileycorp.mineplunder.api.Faction;
 
-public interface IReputation {
+public interface Reputation {
 
 	public int getReputation(Faction faction);
 
