@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common.event;
+package net.smileycorp.mineplunder.events;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -7,9 +7,9 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.smileycorp.mineplunder.Constants;
 import net.smileycorp.mineplunder.api.Faction;
 import net.smileycorp.mineplunder.api.ReputationHandler;
-import net.smileycorp.mineplunder.common.Constants;
 
 @EventBusSubscriber(modid = Constants.MODID)
 public class ReputationEvents {

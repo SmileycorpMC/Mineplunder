@@ -1,0 +1,13 @@
+{	
+	"faction.mineplunder.villager":"Villager",
+	"faction.mineplunder.illager":"Illager",
+	"faction.mineplunder.skeleton": "Skeleton",
+	"faction.mineplunder.nether": "Nether",
+	"faction.mineplunder.piglin": "Piglin",
+	
+	"death.attack.soulFire":"%1$s was consumed by a torrent of soulfire.",
+	"death.attack.soulFire.player":"%1$s was consumed by a torrent of soulfire.",
+	
+	"enchantment.mineplunder.soulblaze":"Soulblaze",
+	"enchantment.mineplunder.soulblaze.desc": "Sets attacked mobs alight with soulfire, deals more damage than regular fire, but powers up certain mobs."
+}

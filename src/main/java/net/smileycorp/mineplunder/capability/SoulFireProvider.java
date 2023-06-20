@@ -1,14 +1,14 @@
-package net.smileycorp.mineplunder.common.capability;
+package net.smileycorp.mineplunder.capability;
 
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.IntTag;
+import net.minecraft.nbt.ByteTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 
-public class SoulFireProvider implements ICapabilitySerializable<IntTag> {
+public class SoulFireProvider implements ICapabilitySerializable<ByteTag> {
 
     private final SoulFire impl = new SoulFireImpl();
 
@@ -18,12 +18,12 @@ public class SoulFireProvider implements ICapabilitySerializable<IntTag> {
     }
 
     @Override
-    public IntTag serializeNBT() {
+    public ByteTag serializeNBT() {
         return impl.save();
     }
 
     @Override
-    public void deserializeNBT(IntTag nbt) {
+    public void deserializeNBT(ByteTag nbt) {
         impl.load(nbt);
     }
 

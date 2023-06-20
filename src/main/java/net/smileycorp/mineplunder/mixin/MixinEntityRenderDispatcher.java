@@ -26,10 +26,10 @@ public abstract class MixinEntityRenderDispatcher {
 
     @Inject(at = @At("HEAD"), method = "renderFlame", cancellable = true)
     private void renderFlame(PoseStack poseStack, MultiBufferSource buffers, Entity entity, CallbackInfo callback) {
-        if (!SoulFire.isBurning(entity)) return;
+        if (!SoulFire.isAblaze(entity)) return;
         callback.cancel();
-        TextureAtlasSprite textureatlassprite = getTexture(new ResourceLocation("blocks/soul_fire_0"));
-        TextureAtlasSprite textureatlassprite1 = getTexture(new ResourceLocation("blocks/soul_fire_1"));
+        TextureAtlasSprite textureatlassprite = getTexture(new ResourceLocation("block/soul_fire_0"));
+        TextureAtlasSprite textureatlassprite1 = getTexture(new ResourceLocation("block/soul_fire_1"));
         poseStack.pushPose();
         float f = entity.getBbWidth() * 1.4F;
         poseStack.scale(f, f, f);
@@ -63,7 +63,6 @@ public abstract class MixinEntityRenderDispatcher {
             f1 *= 0.9F;
             f5 += 0.03F;
         }
-
         poseStack.popPose();
     }
 

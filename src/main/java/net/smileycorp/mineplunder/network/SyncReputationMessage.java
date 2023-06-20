@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common.network;
+package net.smileycorp.mineplunder.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketListener;

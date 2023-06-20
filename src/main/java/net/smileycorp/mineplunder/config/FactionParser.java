@@ -3,10 +3,10 @@ package net.smileycorp.mineplunder.config;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.loading.moddiscovery.ModFile;
+import net.smileycorp.mineplunder.Constants;
+import net.smileycorp.mineplunder.Mineplunder;
 import net.smileycorp.mineplunder.api.Faction;
 import net.smileycorp.mineplunder.api.ReputationHandler;
-import net.smileycorp.mineplunder.common.Constants;
-import net.smileycorp.mineplunder.common.Mineplunder;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;

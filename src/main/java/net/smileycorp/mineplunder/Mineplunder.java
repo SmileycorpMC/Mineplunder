@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common;
+package net.smileycorp.mineplunder;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -10,11 +10,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.smileycorp.mineplunder.api.capability.Reputation;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
-import net.smileycorp.mineplunder.common.capability.ReputationProvider;
-import net.smileycorp.mineplunder.common.capability.SoulFireProvider;
-import net.smileycorp.mineplunder.common.network.PacketHandler;
+import net.smileycorp.mineplunder.capability.ReputationProvider;
+import net.smileycorp.mineplunder.capability.SoulFireProvider;
+import net.smileycorp.mineplunder.network.PacketHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,13 +37,18 @@ public class Mineplunder {
 	}
 
 	@SubscribeEvent
-	public static void clientSetup(FMLClientSetupEvent event){
+	public static void constructMod(FMLConstructModEvent event) {
+		MineplunderEnchantments.ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	@SubscribeEvent
 	public static void setup(FMLCommonSetupEvent event){
 		//FactionParser.readFactionsFromConfig();
 		PacketHandler.initPackets();
+	}
+
+	@SubscribeEvent
+	public static void clientSetup(FMLClientSetupEvent event){
 	}
 
 	@SubscribeEvent

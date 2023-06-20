@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common;
+package net.smileycorp.mineplunder;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

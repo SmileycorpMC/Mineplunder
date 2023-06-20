@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.api.capability;
+package net.smileycorp.mineplunder.api;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;

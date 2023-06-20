@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common.capability;
+package net.smileycorp.mineplunder.capability;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import net.smileycorp.mineplunder.api.Faction;
 import net.smileycorp.mineplunder.api.ReputationHandler;
 import net.smileycorp.mineplunder.api.capability.Reputation;
-import net.smileycorp.mineplunder.common.network.SyncReputationMessage;
+import net.smileycorp.mineplunder.network.SyncReputationMessage;
 
 import java.util.HashMap;
 import java.util.Map;

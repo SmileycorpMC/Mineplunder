@@ -7,8 +7,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.Reputation;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
-import net.smileycorp.mineplunder.common.network.SyncReputationMessage;
-import net.smileycorp.mineplunder.common.network.SyncSoulFireMessage;
+import net.smileycorp.mineplunder.network.SyncReputationMessage;
+import net.smileycorp.mineplunder.network.SyncSoulFireMessage;
 
 public class ClientHandler {
 
@@ -25,6 +25,6 @@ public class ClientHandler {
     public static void syncSoulFire(SyncSoulFireMessage message) {
 		ClientLevel level = Minecraft.getInstance().level;
 		if (level == null) return;
-		SoulFire.setBurning(message.getEntity(level), message.getFireTicks());
+		SoulFire.setSoulFire(message.getEntity(level), message.isSoulFire());
 	}
 }

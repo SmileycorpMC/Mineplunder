@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common.capability;
+package net.smileycorp.mineplunder.capability;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

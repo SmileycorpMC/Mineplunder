@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.smileycorp.mineplunder.common.Mineplunder;
+import net.smileycorp.mineplunder.Mineplunder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
-package net.smileycorp.mineplunder.common.network;
+package net.smileycorp.mineplunder.network;
 
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.smileycorp.atlas.api.network.NetworkUtils;
-import net.smileycorp.mineplunder.common.Constants;
+import net.smileycorp.mineplunder.Constants;
 
 public class PacketHandler {
 

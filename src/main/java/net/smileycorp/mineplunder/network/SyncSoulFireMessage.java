@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.common.network;
+package net.smileycorp.mineplunder.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketListener;
@@ -12,33 +12,34 @@ import net.smileycorp.mineplunder.client.ClientHandler;
 
 public class SyncSoulFireMessage extends AbstractMessage {
 
-	private int entity, fireTicks;
+	private int entity;
+	private boolean soulFire;
 
 	public SyncSoulFireMessage() {}
 
-	public SyncSoulFireMessage(Entity entity, int fireTicks) {
+	public SyncSoulFireMessage(Entity entity, boolean soulFire) {
 		this.entity = entity.getId();
-		this.fireTicks = fireTicks;
+		this.soulFire = soulFire;
 	}
 
 	@Override
 	public void read(FriendlyByteBuf buf){
 		entity = buf.readInt();
-		fireTicks = buf.readInt();
+		soulFire = buf.readBoolean();
 	}
 
 	@Override
 	public void write(FriendlyByteBuf buf){
 		buf.writeInt(entity);
-		buf.writeInt(fireTicks);
+		buf.writeBoolean(soulFire);
 	}
 
 	public Entity getEntity(Level level) {
 		return level.getEntity(entity);
 	}
 
-	public int getFireTicks() {
-		return fireTicks;
+	public boolean isSoulFire() {
+		return soulFire;
 	}
 
 	@Override
