@@ -3,7 +3,6 @@ package net.smileycorp.mineplunder.mixin;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.level.Level;
 import net.smileycorp.mineplunder.api.MineplunderEntityTags;

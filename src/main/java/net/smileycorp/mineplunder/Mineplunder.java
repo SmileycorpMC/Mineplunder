@@ -39,6 +39,8 @@ public class Mineplunder {
 	@SubscribeEvent
 	public static void constructMod(FMLConstructModEvent event) {
 		MineplunderEnchantments.ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MineplunderEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MineplunderItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	@SubscribeEvent
