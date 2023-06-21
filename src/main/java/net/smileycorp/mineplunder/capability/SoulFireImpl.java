@@ -3,6 +3,7 @@ package net.smileycorp.mineplunder.capability;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.PacketDistributor;
+import net.smileycorp.mineplunder.Mineplunder;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 import net.smileycorp.mineplunder.network.PacketHandler;
 import net.smileycorp.mineplunder.network.SyncSoulFireMessage;
@@ -12,9 +13,7 @@ public class SoulFireImpl implements SoulFire {
     private boolean isSoulFire;
 
     @Override
-    public boolean isAblaze() {
-        return isSoulFire;
-    }
+    public boolean isAblaze() { return isSoulFire; }
 
     @Override
     public void setSoulFire(boolean isSoulFire, Entity entity) {

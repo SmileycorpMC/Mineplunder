@@ -3,6 +3,7 @@ package net.smileycorp.mineplunder.api.capability;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.util.LazyOptional;
+import net.smileycorp.mineplunder.Mineplunder;
 
 
 public interface SoulFire {
@@ -28,7 +29,7 @@ public interface SoulFire {
     }
 
     static boolean isAblaze(Entity entity) {
-        if (entity == null || entity.fireImmune()) return false;
+        if (entity == null |! entity.isOnFire()) return false;
         LazyOptional<SoulFire> cap = entity.getCapability(MineplunderCapabilities.SOULFIRE_CAPABILITY);
         if (cap.isPresent()) return cap.resolve().get().isAblaze();
         return false;

@@ -1,11 +1,13 @@
-package net.smileycorp.mineplunder.client;
+package net.smileycorp.mineplunder.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.BlazeRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.StrayRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.item.SpawnEggItem;
 import net.smileycorp.mineplunder.Constants;
 
 public class InfernalSoulRenderer extends BlazeRenderer {

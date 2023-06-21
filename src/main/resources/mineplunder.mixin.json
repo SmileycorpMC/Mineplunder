@@ -4,12 +4,10 @@
 	"compatibilityLevel": "JAVA_17",
 	"refmap": "mineplunder.refmap.json",
 	"mixins": [
-		"MixinArrow",
 		"MixinBaseFireBlock",
 		"MixinCampfireBlock",
 		"MixinEntity",
-		"MixinPackRepository",
-		"MixinSpectralArrow"
+		"MixinPackRepository"
 	],
 	"client": [
 		"MixinEntityRenderDispatcher",

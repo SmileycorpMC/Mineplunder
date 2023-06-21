@@ -2,8 +2,11 @@ package net.smileycorp.mineplunder.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.util.LazyOptional;
+import net.smileycorp.mineplunder.Mineplunder;
+import net.smileycorp.mineplunder.MineplunderEntities;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.Reputation;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
@@ -25,6 +28,8 @@ public class ClientHandler {
     public static void syncSoulFire(SyncSoulFireMessage message) {
 		ClientLevel level = Minecraft.getInstance().level;
 		if (level == null) return;
-		SoulFire.setSoulFire(message.getEntity(level), message.isSoulFire());
+		Entity e = message.getEntity(level);
+		Mineplunder.logInfo(e);
+		SoulFire.setSoulFire(e, message.isSoulFire());
 	}
 }
