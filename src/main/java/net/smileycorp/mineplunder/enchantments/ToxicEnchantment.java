@@ -1,20 +1,21 @@
 package net.smileycorp.mineplunder.enchantments;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.smileycorp.mineplunder.init.MineplunderEnchantments;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
 
-public class SoulblazeEnchantment extends Enchantment {
-    public SoulblazeEnchantment() {
+public class ToxicEnchantment extends Enchantment {
+    public ToxicEnchantment() {
         super(Rarity.RARE, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     public int getMinCost(int level) {
-        return 30 + 20 * (level - 1);
+        return 10 + 15 * (level - 1);
     }
 
     public int getMaxCost(int p_45002_) {
@@ -22,7 +23,7 @@ public class SoulblazeEnchantment extends Enchantment {
     }
 
     public int getMaxLevel() {
-        return 1;
+        return 3;
     };
 
     public boolean checkCompatibility(Enchantment enchantment) {
@@ -30,7 +31,8 @@ public class SoulblazeEnchantment extends Enchantment {
     }
 
     public void doPostAttack(LivingEntity user, Entity target, int level) {
-        SoulFire.setBurning(target, 80*level);
+        if (!(target instanceof LivingEntity)) return;
+        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON, (level * 4 - 1) * 20, level));
     }
 
 }

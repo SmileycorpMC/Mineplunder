@@ -9,13 +9,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.smileycorp.mineplunder.MineplunderEntities;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 
 public class Witherwight extends AbstractSkeleton {
@@ -64,6 +62,10 @@ public class Witherwight extends AbstractSkeleton {
            SoulFire.setBurning(capturedArrow, 2000);
            capturedArrow = null;
        }
+    }
+
+    public boolean canBeAffected(MobEffectInstance p_34192_) {
+        return p_34192_.getEffect() == MobEffects.WITHER ? false : super.canBeAffected(p_34192_);
     }
 
 }

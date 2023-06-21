@@ -7,7 +7,8 @@
 		"MixinBaseFireBlock",
 		"MixinCampfireBlock",
 		"MixinEntity",
-		"MixinPackRepository"
+		"MixinPackRepository",
+		"MixinWitherSkeleton"
 	],
 	"client": [
 		"MixinEntityRenderDispatcher",

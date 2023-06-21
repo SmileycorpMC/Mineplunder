@@ -16,6 +16,10 @@ import net.smileycorp.mineplunder.api.capability.Reputation;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 import net.smileycorp.mineplunder.capability.ReputationProvider;
 import net.smileycorp.mineplunder.capability.SoulFireProvider;
+import net.smileycorp.mineplunder.init.MineplunderEffects;
+import net.smileycorp.mineplunder.init.MineplunderEnchantments;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
+import net.smileycorp.mineplunder.init.MineplunderItems;
 import net.smileycorp.mineplunder.network.PacketHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +42,7 @@ public class Mineplunder {
 
 	@SubscribeEvent
 	public static void constructMod(FMLConstructModEvent event) {
+		MineplunderEffects.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderEnchantments.ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

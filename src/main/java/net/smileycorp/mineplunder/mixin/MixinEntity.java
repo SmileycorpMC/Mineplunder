@@ -7,12 +7,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraft.world.level.Level;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.init.MineplunderEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
@@ -53,6 +55,14 @@ public abstract class MixinEntity {
             }
         }
         return hurt(source, amount);
+    }
+
+    @Inject(at = @At("HEAD"), method = "isFreezing", cancellable = true)
+    public void isFreezing(CallbackInfoReturnable<Boolean> callback) {
+        if (!((Object)this instanceof LivingEntity)) return;
+        if (!((LivingEntity)(Object)this).hasEffect(MineplunderEffects.FROSTBITE.get())) return;
+        callback.setReturnValue(true);
+        callback.cancel();
     }
 
 }

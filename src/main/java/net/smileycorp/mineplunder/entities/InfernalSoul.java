@@ -1,8 +1,6 @@
 package net.smileycorp.mineplunder.entities;
 
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.ByteTag;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -19,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.smileycorp.mineplunder.MineplunderEntities;
-import net.smileycorp.mineplunder.MineplunderItems;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
+import net.smileycorp.mineplunder.init.MineplunderItems;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 import net.smileycorp.mineplunder.capability.InfernalSoulFire;

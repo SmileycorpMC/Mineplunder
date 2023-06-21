@@ -16,7 +16,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.smileycorp.mineplunder.MineplunderEntities;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 import net.smileycorp.mineplunder.capability.InfernalSoulFire;

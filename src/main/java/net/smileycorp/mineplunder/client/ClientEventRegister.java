@@ -6,7 +6,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.smileycorp.mineplunder.Constants;
-import net.smileycorp.mineplunder.MineplunderEntities;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.client.renderer.ClothedSkeletonRenderer;
 import net.smileycorp.mineplunder.client.renderer.InfernalSoulRenderer;
 

@@ -1,13 +1,26 @@
 {	
 	"faction.mineplunder.villager":"Villager",
 	"faction.mineplunder.illager":"Illager",
-	"faction.mineplunder.skeleton": "Skeleton",
+	"faction.mineplunder.undead": "Undead",
 	"faction.mineplunder.nether": "Nether",
 	"faction.mineplunder.piglin": "Piglin",
+	"faction.mineplunder.ender": "Ender",
 	
 	"death.attack.soulFire":"%1$s was consumed by a torrent of soulfire.",
 	"death.attack.soulFire.player":"%1$s was consumed by a torrent of soulfire.",
 	
+	"item.mineplunder.soul_powder.name":"Soul Powder",
+	"item.mineplunder.soul_rod.name":"Soul Rod",
+	"item.mineplunder.soul_charge.name":"Soul Charge",
+	
+	"item.mineplunder.witherblade.name":"Witherblade",
+	
 	"enchantment.mineplunder.soulblaze":"Soulblaze",
-	"enchantment.mineplunder.soulblaze.desc": "Sets attacked mobs alight with soulfire, deals more damage than regular fire, but powers up certain mobs."
+	"enchantment.mineplunder.soulblaze.desc": "Sets attacked mobs alight with soulfire, deals more damage than regular fire, but powers up certain mobs.",
+	"enchantment.mineplunder.decay":"Decay",
+	"enchantment.mineplunder.decay.desc": "Applies the wither potion effect damage over time to attacked entities.",
+	"enchantment.mineplunder.toxic":"Toxic",
+	"enchantment.mineplunder.toxic.desc": "Applies the poison potion effect damage over time to attacked entities.",
+	"enchantment.mineplunder.frostburn":"Frostburn",
+	"enchantment.mineplunder.frostburn.desc": "Applies frostbite effect damage over time, damaging fire mobs greatly."
 }
