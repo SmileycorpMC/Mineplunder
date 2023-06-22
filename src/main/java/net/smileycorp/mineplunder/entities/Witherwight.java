@@ -13,8 +13,8 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
 
 public class Witherwight extends AbstractSkeleton {
 

@@ -9,6 +9,9 @@
 	"death.attack.soulFire":"%1$s was consumed by a torrent of soulfire.",
 	"death.attack.soulFire.player":"%1$s was consumed by a torrent of soulfire.",
 	
+	"entity.mineplunder.infernal_soul":"Infernal Soul",
+	"entity.mineplunder.witherwight":"Witherwight",
+	
 	"item.mineplunder.soul_powder.name":"Soul Powder",
 	"item.mineplunder.soul_rod.name":"Soul Rod",
 	"item.mineplunder.soul_charge.name":"Soul Charge",
@@ -22,5 +25,5 @@
 	"enchantment.mineplunder.toxic":"Toxic",
 	"enchantment.mineplunder.toxic.desc": "Applies the poison potion effect damage over time to attacked entities.",
 	"enchantment.mineplunder.frostburn":"Frostburn",
-	"enchantment.mineplunder.frostburn.desc": "Applies frostbite effect damage over time, damaging fire mobs greatly."
+	"enchantment.mineplunder.frostburn.desc": "Applies frostbite effect damaging fire mobs greatly and slowing targets."
 }

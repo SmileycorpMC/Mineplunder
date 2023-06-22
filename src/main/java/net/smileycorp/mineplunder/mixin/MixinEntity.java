@@ -19,8 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public abstract class MixinEntity {
 
-    @Shadow public abstract int getRemainingFireTicks();
-
     @Shadow public abstract void setRemainingFireTicks(int p_20269_);
 
     @Shadow public abstract DamageSources damageSources();
@@ -29,9 +27,11 @@ public abstract class MixinEntity {
 
     @Shadow private Level level;
 
+    @Shadow public abstract int getRemainingFireTicks();
+
     @Inject(at = @At("TAIL"), method = "setRemainingFireTicks", cancellable = true)
     public void setRemainingFireTicks(int ticks, CallbackInfo callback) {
-       if (getRemainingFireTicks() <= 0 &! level.isClientSide) SoulFire.setSoulFire((Entity)(Object)this, false);
+       if (this.getRemainingFireTicks() <= 0 &! level.isClientSide) SoulFire.setSoulFire((Entity)(Object)this, false);
     }
 
     @Inject(at = @At("HEAD"), method = "setSecondsOnFire", cancellable = true)
@@ -62,6 +62,14 @@ public abstract class MixinEntity {
         if (!((Object)this instanceof LivingEntity)) return;
         if (!((LivingEntity)(Object)this).hasEffect(MineplunderEffects.FROSTBITE.get())) return;
         callback.setReturnValue(true);
+        callback.cancel();
+    }
+
+    @Inject(at = @At("HEAD"), method = "getTicksFrozen", cancellable = true)
+    public void getTicksFrozen(CallbackInfoReturnable<Integer> callback) {
+        if (!((Object)this instanceof LivingEntity)) return;
+        if (!((LivingEntity)(Object)this).hasEffect(MineplunderEffects.FROSTBITE.get())) return;
+        callback.setReturnValue(500);
         callback.cancel();
     }
 

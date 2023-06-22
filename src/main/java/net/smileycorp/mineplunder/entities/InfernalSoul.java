@@ -17,11 +17,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.smileycorp.mineplunder.init.MineplunderEntities;
-import net.smileycorp.mineplunder.init.MineplunderItems;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.SoulFire;
 import net.smileycorp.mineplunder.capability.InfernalSoulFire;
+import net.smileycorp.mineplunder.init.MineplunderEntities;
+import net.smileycorp.mineplunder.init.MineplunderItems;
 
 public class InfernalSoul extends Blaze {
 

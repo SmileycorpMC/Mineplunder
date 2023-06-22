@@ -1,7 +1,6 @@
 package net.smileycorp.mineplunder.enchantments;
 
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +15,7 @@ public class FrostburnEnchantment extends Enchantment {
     }
 
     public int getMinCost(int level) {
-        return 15 + 20 * (level - 1);
+        return 10 + 15 * (level - 1);
     }
 
     public int getMaxCost(int p_45002_) {
@@ -24,7 +23,7 @@ public class FrostburnEnchantment extends Enchantment {
     }
 
     public int getMaxLevel() {
-        return 1;
+        return 3;
     };
 
     public boolean checkCompatibility(Enchantment enchantment) {
@@ -33,7 +32,7 @@ public class FrostburnEnchantment extends Enchantment {
 
     public void doPostAttack(LivingEntity user, Entity target, int level) {
         if (!(target instanceof LivingEntity)) return;
-        ((LivingEntity) target).addEffect(new MobEffectInstance(MineplunderEffects.FROSTBITE.get(), (level * 4 - 1) * 20, level));
+        ((LivingEntity) target).addEffect(new MobEffectInstance(MineplunderEffects.FROSTBITE.get(), 60, level-1));
     }
 
 }

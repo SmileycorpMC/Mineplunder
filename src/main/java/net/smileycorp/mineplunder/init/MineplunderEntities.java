@@ -3,7 +3,6 @@ package net.smileycorp.mineplunder.init;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +20,7 @@ public class MineplunderEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Constants.MODID);
 
     public static final RegistryObject<EntityType<InfernalSoul>> INFERNAL_SOUL = ENTITIES.register("infernal_soul", () ->
-            EntityType.Builder.<InfernalSoul>of(InfernalSoul::new, MobCategory.MONSTER).sized(0.66F, 1.98F).fireImmune()
+            EntityType.Builder.<InfernalSoul>of(InfernalSoul::new, MobCategory.MONSTER).sized(0.72F, 2F).fireImmune()
                     .clientTrackingRange(8).build("infernal_soul"));
 
     public static final RegistryObject<EntityType<Witherwight>> WITHERWIGHT = ENTITIES.register("witherwight", () ->

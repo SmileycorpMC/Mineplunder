@@ -3,7 +3,6 @@ package net.smileycorp.mineplunder.api.capability;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.util.LazyOptional;
-import net.smileycorp.mineplunder.Mineplunder;
 
 
 public interface SoulFire {

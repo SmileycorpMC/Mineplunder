@@ -3,10 +3,8 @@ package net.smileycorp.mineplunder.client.renderer;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
-import net.minecraft.client.renderer.entity.layers.StrayClothingLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.smileycorp.mineplunder.Constants;
 
 public class ClothedSkeletonRenderer extends SkeletonRenderer {
 
