@@ -17,13 +17,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.capability.InfernalSoulFire;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 
 public class SmallSoulFireball extends Fireball {
 
-    private final SoulFire soulfire_capability = new InfernalSoulFire();
+    private final SpecialFire soulfire_capability = new InfernalSoulFire();
 
     public SmallSoulFireball(EntityType<? extends SmallSoulFireball> p_37364_, Level p_37365_) {
         super(p_37364_, p_37365_);
@@ -39,7 +39,7 @@ public class SmallSoulFireball extends Fireball {
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        return cap == MineplunderCapabilities.SOULFIRE_CAPABILITY ? LazyOptional.of(() -> soulfire_capability).cast()
+        return cap == MineplunderCapabilities.SPECIAL_FIRE_CAPABILITY ? LazyOptional.of(() -> soulfire_capability).cast()
                 : super.getCapability(cap, side);
     }
 
@@ -50,9 +50,9 @@ public class SmallSoulFireball extends Fireball {
             Entity entity = p_37386_.getEntity();
             Entity owner = this.getOwner();
             int i = entity.getRemainingFireTicks();
-            SoulFire.setBurning(entity, 100);
+            SpecialFire.setBurning(entity, 100, SpecialFire.FireType.SOUL_FIRE);
             if (!entity.hurt(this.damageSources().fireball(this, owner), 5.0F)) {
-                SoulFire.setBurning(entity, 1);
+                SpecialFire.setBurning(entity, 1, SpecialFire.FireType.SOUL_FIRE);
             } else if (owner instanceof LivingEntity) {
                 this.doEnchantDamageEffects((LivingEntity)owner, entity);
             }

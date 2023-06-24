@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.smileycorp.mineplunder.DamageSources;
+import net.smileycorp.mineplunder.MineplunderDamageSources;
 import net.smileycorp.mineplunder.api.MineplunderBlockTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,7 +36,7 @@ public abstract class MixinCampfireBlock extends Block {
         callback.cancel();
         if (state.getValue(LIT)) {
             if (entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) return;
-            entity.hurt(DamageSources.soulFire(entity), fireDamage);
+            entity.hurt(MineplunderDamageSources.soulFire(entity), fireDamage);
         }
     }
 

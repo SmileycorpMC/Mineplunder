@@ -13,7 +13,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 
 public class Witherwight extends AbstractSkeleton {
@@ -59,7 +59,7 @@ public class Witherwight extends AbstractSkeleton {
     public void performRangedAttack(LivingEntity p_32141_, float p_32142_) {
        super.performRangedAttack(p_32141_, p_32142_);
        if (capturedArrow != null) {
-           SoulFire.setBurning(capturedArrow, 2000);
+           SpecialFire.setBurning(capturedArrow, 2000, SpecialFire.FireType.SOUL_FIRE);
            capturedArrow = null;
        }
     }

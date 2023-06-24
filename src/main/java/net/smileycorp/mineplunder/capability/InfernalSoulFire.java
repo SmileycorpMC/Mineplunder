@@ -2,17 +2,17 @@ package net.smileycorp.mineplunder.capability;
 
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.world.entity.Entity;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 
-public class InfernalSoulFire implements SoulFire {
+public class InfernalSoulFire implements SpecialFire {
 
        @Override
-       public boolean isAblaze() {
-           return true;
+       public FireType getType() {
+           return FireType.SOUL_FIRE;
        }
 
        @Override
-       public void setSoulFire(boolean soulFire, Entity entity) {}
+       public void setFireType(FireType type, Entity entity) {}
 
        @Override
        public ByteTag save() {

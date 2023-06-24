@@ -13,13 +13,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.smileycorp.mineplunder.api.capability.Reputation;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.capability.ReputationProvider;
-import net.smileycorp.mineplunder.capability.SoulFireProvider;
-import net.smileycorp.mineplunder.init.MineplunderEffects;
-import net.smileycorp.mineplunder.init.MineplunderEnchantments;
-import net.smileycorp.mineplunder.init.MineplunderEntities;
-import net.smileycorp.mineplunder.init.MineplunderItems;
+import net.smileycorp.mineplunder.capability.SpecialFireProvider;
+import net.smileycorp.mineplunder.init.*;
 import net.smileycorp.mineplunder.network.PacketHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,9 +39,12 @@ public class Mineplunder {
 
 	@SubscribeEvent
 	public static void constructMod(FMLConstructModEvent event) {
+		MineplunderBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MineplunderBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderEffects.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderEnchantments.ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MineplunderEntities.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
@@ -61,13 +61,13 @@ public class Mineplunder {
 	@SubscribeEvent
 	public void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.register(Reputation.class);
-		event.register(SoulFire.class);
+		event.register(SpecialFire.class);
 	}
 
 	@SubscribeEvent
 	public void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
 		Entity entity = event.getObject();
-		event.addCapability(Constants.loc("soulfire"), new SoulFireProvider());
+		event.addCapability(Constants.loc("soulfire"), new SpecialFireProvider());
 		if (entity instanceof Player &!(entity instanceof FakePlayer)) {
 			event.addCapability(Constants.loc("reputation"), new ReputationProvider());
 		}

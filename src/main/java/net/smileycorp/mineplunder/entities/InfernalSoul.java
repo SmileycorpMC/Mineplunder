@@ -18,14 +18,14 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.capability.InfernalSoulFire;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderItems;
 
 public class InfernalSoul extends Blaze {
 
-    private final SoulFire soulfire_capability = new InfernalSoulFire();
+    private final SpecialFire soulfire_capability = new InfernalSoulFire();
 
     public InfernalSoul(EntityType<? extends InfernalSoul> type, Level level) {
         super(type, level);
@@ -51,7 +51,7 @@ public class InfernalSoul extends Blaze {
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        return cap == MineplunderCapabilities.SOULFIRE_CAPABILITY ? LazyOptional.of(() -> soulfire_capability).cast()
+        return cap == MineplunderCapabilities.SPECIAL_FIRE_CAPABILITY ? LazyOptional.of(() -> soulfire_capability).cast()
                 : super.getCapability(cap, side);
     }
 

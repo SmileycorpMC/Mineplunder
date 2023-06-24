@@ -8,38 +8,39 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 import net.smileycorp.atlas.api.network.AbstractMessage;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.client.ClientHandler;
 
 public class SyncSoulFireMessage extends AbstractMessage {
 
 	private int entity;
-	private boolean soulFire;
+	private SpecialFire.FireType type;
 
 	public SyncSoulFireMessage() {}
 
-	public SyncSoulFireMessage(Entity entity, boolean soulFire) {
+	public SyncSoulFireMessage(Entity entity, SpecialFire.FireType type) {
 		this.entity = entity.getId();
-		this.soulFire = soulFire;
+		this.type = type;
 	}
 
 	@Override
 	public void read(FriendlyByteBuf buf){
 		entity = buf.readInt();
-		soulFire = buf.readBoolean();
+		type = SpecialFire.FireType.get(buf.readByte());
 	}
 
 	@Override
 	public void write(FriendlyByteBuf buf){
 		buf.writeInt(entity);
-		buf.writeBoolean(soulFire);
+		buf.writeByte(type.getID());
 	}
 
 	public Entity getEntity(Level level) {
 		return level.getEntity(entity);
 	}
 
-	public boolean isSoulFire() {
-		return soulFire;
+	public SpecialFire.FireType getType() {
+		return type;
 	}
 
 	@Override

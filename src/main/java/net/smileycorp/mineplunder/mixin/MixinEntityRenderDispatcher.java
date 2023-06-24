@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,10 +26,11 @@ public abstract class MixinEntityRenderDispatcher {
 
     @Inject(at = @At("HEAD"), method = "renderFlame", cancellable = true)
     private void renderFlame(PoseStack poseStack, MultiBufferSource buffers, Entity entity, CallbackInfo callback) {
-        if (!SoulFire.isAblaze(entity)) return;
+        SpecialFire.FireType type = SpecialFire.getFireType(entity);
+        if (type == null) return;
         callback.cancel();
-        TextureAtlasSprite textureatlassprite = getTexture(new ResourceLocation("block/soul_fire_0"));
-        TextureAtlasSprite textureatlassprite1 = getTexture(new ResourceLocation("block/soul_fire_1"));
+        TextureAtlasSprite textureatlassprite = getTexture(type.getTexture(0));
+        TextureAtlasSprite textureatlassprite1 = getTexture(type.getTexture(1));
         poseStack.pushPose();
         float f = entity.getBbWidth() * 1.4F;
         poseStack.scale(f, f, f);

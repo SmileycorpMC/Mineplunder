@@ -1,11 +1,8 @@
 {
 	"name": "mineplunder:piglin",
-	"default_reputation": 25,
-	"members": [
-		"minecraft:piglin",
-		"minecraft:piglin_brute",
-		"minecraft:zombified_piglin"
-	],
+	"default_reputation": 0,
+	"warriors": "forge:piglins",
+	"civillians": "mineplunder:piglin_civilians",
 	"enemies": [
 		"mineplunder:villager",
 		"mineplunder:illager",

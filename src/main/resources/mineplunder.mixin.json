@@ -8,7 +8,7 @@
 		"MixinCampfireBlock",
 		"MixinEntity",
 		"MixinLivingEntity",
-		"MixinPackRepository",
+		"MixinBuiltInPackSource",
 		"MixinWitherSkeleton"
 	],
 	"client": [

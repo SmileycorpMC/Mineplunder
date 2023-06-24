@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraft.world.level.Level;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.init.MineplunderEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +31,7 @@ public abstract class MixinEntity {
 
     @Inject(at = @At("TAIL"), method = "setRemainingFireTicks", cancellable = true)
     public void setRemainingFireTicks(int ticks, CallbackInfo callback) {
-       if (this.getRemainingFireTicks() <= 0 &! level.isClientSide) SoulFire.setSoulFire((Entity)(Object)this, false);
+       if (this.getRemainingFireTicks() <= 0 &! level.isClientSide) SpecialFire.setFireType((Entity)(Object)this, null);
     }
 
     @Inject(at = @At("HEAD"), method = "setSecondsOnFire", cancellable = true)
@@ -48,11 +48,12 @@ public abstract class MixinEntity {
 
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     public boolean hurt(Entity instance, DamageSource source, float amount) {
-        if (SoulFire.isAblaze((Entity)(Object)this)) {
-            if (source == damageSources().onFire()) {
-                source = net.smileycorp.mineplunder.DamageSources.soulFire((Entity)(Object)this);
-                if (amount == 1) amount = 2;
-            }
+        SpecialFire.FireType type = SpecialFire.getFireType((Entity) (Object) this);
+        if (type != null && source == damageSources().onFire()) {
+            SpecialFire.FireDamageGetter getter = new SpecialFire.FireDamageGetter(source, amount, (Entity) (Object)this);
+            type.accept(getter);
+            source = getter.getSource();
+            amount = getter.getAmount();
         }
         return hurt(source, amount);
     }

@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,8 +17,9 @@ public class MixinScreenEffectRenderer {
     @Redirect(method = "renderFire", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/model/Material;sprite()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;"))
     private static TextureAtlasSprite renderFire(Material material) {
         Minecraft mc = Minecraft.getInstance();
-        return SoulFire.isAblaze(mc.player) ? Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
-                .apply(new ResourceLocation("block/soul_fire_1")) : material.sprite();
+        SpecialFire.FireType type = SpecialFire.getFireType(mc.player);
+        return type == null ? material.sprite() : Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+                .apply(type.getTexture(1));
     }
 
 }

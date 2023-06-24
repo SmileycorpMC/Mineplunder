@@ -1,13 +1,8 @@
 {
 	"name": "mineplunder:skeleton",
 	"default_reputation": -50,
-	"members": [
-		"minecraft:skeleton",
-		"minecraft:skeleton_horse",
-		"minecraft:stray",
-		"minecraft:spider",
-		"minecraft:cave_spider"
-	],
+	"warriors": "minecraft:skeletons",
+	"civillians": "mineplunder:skeleton_civilians",
 	"enemies": [
 		"mineplunder:villager",
 		"mineplunder:nether",

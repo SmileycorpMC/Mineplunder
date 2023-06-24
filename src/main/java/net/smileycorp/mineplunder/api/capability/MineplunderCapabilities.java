@@ -8,6 +8,6 @@ public class MineplunderCapabilities {
 
     public static Capability<Reputation> REPUTATION_CAPABILITY = CapabilityManager.get(new CapabilityToken<Reputation>(){});
 
-    public static Capability<SoulFire> SOULFIRE_CAPABILITY = CapabilityManager.get(new CapabilityToken<SoulFire>(){});
+    public static Capability<SpecialFire> SPECIAL_FIRE_CAPABILITY = CapabilityManager.get(new CapabilityToken<SpecialFire>(){});
 
 }

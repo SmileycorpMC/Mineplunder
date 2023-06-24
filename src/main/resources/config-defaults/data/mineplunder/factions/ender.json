@@ -1,0 +1,10 @@
+{
+	"name": "mineplunder:ender",
+	"default_reputation": 0,
+	"warriors": "mineplunder:end_mobs",
+	"civillians": "mineplunder:ender_civillians",
+	"enemies": [
+		"mineplunder:illager",
+		"mineplunder:piglin"
+	]
+}

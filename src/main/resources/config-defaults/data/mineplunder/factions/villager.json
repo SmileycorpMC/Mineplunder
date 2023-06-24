@@ -1,11 +1,8 @@
 {
 	"name": "mineplunder:villager",
-	"default_reputation": 50,
-	"members": [
-		"minecraft:villager",
-		"minecraft:iron_golem",
-		"minecraft:wandering_trader"
-	],
+	"default_reputation": 0,
+	"warriors": "mineplunder:village_guards",
+	"civillians": "forge:villagers",
 	"enemies": [
 		"mineplunder:illager",
 		"mineplunder:skeleton",

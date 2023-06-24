@@ -1,0 +1,10 @@
+{
+	"name": "mineplunder:illager",
+	"default_reputation": -50,
+	"warriors": "minecraft:raiders",
+	"civillians": "mineplunder:illager_civillians",
+	"enemies": [
+		"mineplunder:villager",
+		"mineplunder:piglin"
+	]
+}

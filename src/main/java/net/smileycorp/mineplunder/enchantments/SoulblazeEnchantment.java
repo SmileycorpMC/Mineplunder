@@ -5,7 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.init.MineplunderEnchantments;
 
 public class SoulblazeEnchantment extends Enchantment {
@@ -30,7 +30,7 @@ public class SoulblazeEnchantment extends Enchantment {
     }
 
     public void doPostAttack(LivingEntity user, Entity target, int level) {
-        SoulFire.setBurning(target, 80*level);
+        SpecialFire.setBurning(target, 80*level, SpecialFire.FireType.SOUL_FIRE);
     }
 
 }

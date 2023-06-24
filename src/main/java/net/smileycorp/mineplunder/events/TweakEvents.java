@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.smileycorp.mineplunder.Constants;
 import net.smileycorp.mineplunder.api.MineplunderDamageTags;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.entities.InfernalSoul;
 import net.smileycorp.mineplunder.entities.Witherwight;
 
@@ -78,7 +78,7 @@ public class TweakEvents {
 		Level level = entity.level();
 		if(level.isClientSide) return;
 		if (!entity.getType().is(EntityTypeTags.SKELETONS) || entity.isOnFire() || entity.fireImmune()) return;
-		if (level.dimensionType().ultraWarm()) SoulFire.setBurning(entity, 100);
+		if (level.dimensionType().ultraWarm()) SpecialFire.setBurning(entity, 100, SpecialFire.FireType.SOUL_FIRE);
 	}
 
 	@SubscribeEvent
@@ -86,7 +86,7 @@ public class TweakEvents {
 		LivingEntity entity = event.getEntity();
 		Level level = entity.level();
 		if(!level.isClientSide) {
-			if ((event.getSource().is(MineplunderDamageTags.SOUL_DAMAGE) || SoulFire.isAblaze(entity))
+			if ((event.getSource().is(MineplunderDamageTags.SOUL_DAMAGE) || SpecialFire.getFireType(entity) == SpecialFire.FireType.SOUL_FIRE)
 					&& entity.getType().is(EntityTypeTags.SKELETONS)) {
 				Vec3 pos = entity.position();
 				WitherSkeleton newentity = new WitherSkeleton(EntityType.WITHER_SKELETON, level);
@@ -112,11 +112,12 @@ public class TweakEvents {
 			BlockHitResult blockHit = (BlockHitResult) hit;
 			BlockPos pos = blockHit.getBlockPos().relative(blockHit.getDirection());
 			if (level.getBlockState(pos).isAir()) {
-				level.setBlockAndUpdate(pos, (SoulFire.isAblaze(entity) ? Blocks.SOUL_FIRE : Blocks.FIRE).defaultBlockState());
+				level.setBlockAndUpdate(pos, (SpecialFire.getFireType(entity) == SpecialFire.FireType.SOUL_FIRE ? Blocks.SOUL_FIRE : Blocks.FIRE).defaultBlockState());
 			}
 		} if (hit instanceof EntityHitResult) {
 			Entity hitEntity = ((EntityHitResult) hit).getEntity();
-			if (SoulFire.isAblaze(entity)) SoulFire.setSoulFire(hitEntity, true);
+			SpecialFire.FireType type = SpecialFire.getFireType(entity);
+			if (type != null) SpecialFire.setFireType(hitEntity, type);
 		}
 	}
 

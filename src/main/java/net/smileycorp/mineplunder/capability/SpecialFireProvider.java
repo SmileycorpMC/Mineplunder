@@ -6,15 +6,15 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
-import net.smileycorp.mineplunder.api.capability.SoulFire;
+import net.smileycorp.mineplunder.api.capability.SpecialFire;
 
-public class SoulFireProvider implements ICapabilitySerializable<ByteTag> {
+public class SpecialFireProvider implements ICapabilitySerializable<ByteTag> {
 
-    private final SoulFire impl = new SoulFireImpl();
+    private final SpecialFire impl = new SpecialFireImpl();
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        return cap == MineplunderCapabilities.SOULFIRE_CAPABILITY ? LazyOptional.of(() -> impl).cast() : LazyOptional.empty();
+        return cap == MineplunderCapabilities.SPECIAL_FIRE_CAPABILITY ? LazyOptional.of(() -> impl).cast() : LazyOptional.empty();
     }
 
     @Override
