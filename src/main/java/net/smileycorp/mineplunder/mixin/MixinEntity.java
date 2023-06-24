@@ -34,11 +34,18 @@ public abstract class MixinEntity {
        if (this.getRemainingFireTicks() <= 0 &! level.isClientSide) SpecialFire.setFireType((Entity)(Object)this, null);
     }
 
+    @Inject(at = @At("HEAD"), method = "clearFire", cancellable = true)
+    public void clearFire(CallbackInfo callback) {
+        SpecialFire.FireType type = SpecialFire.getFireType((Entity) (Object) this);
+        if (!(type == null || type.canBeExtinguished())) callback.cancel();
+    }
+
     @Inject(at = @At("HEAD"), method = "setSecondsOnFire", cancellable = true)
     public void setSecondsOnFire(int seconds, CallbackInfo callback) {
         callback.cancel();
         int i = seconds * 20;
-        if ((Object) this instanceof LivingEntity) {
+        SpecialFire.FireType type = SpecialFire.getFireType((Entity) (Object) this);
+        if ((Object) this instanceof LivingEntity && (type == null || type.canBeExtinguished())) {
             i = ProtectionEnchantment.getFireAfterDampener((LivingEntity) (Object) this, i);
         }
         if (this.getRemainingFireTicks() < i) {

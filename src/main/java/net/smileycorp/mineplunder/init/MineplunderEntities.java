@@ -1,14 +1,12 @@
 package net.smileycorp.mineplunder.init;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -42,7 +40,7 @@ public class MineplunderEntities {
 
     public static <T extends Mob> RegistryObject<EntityType<T>> register(String name, int foreground, int background, EntityType.Builder<T> builder) {
         RegistryObject<EntityType<T>> type = ENTITIES.register(name, ()->builder.build(name));
-        ITEMS.register(name+"_spawn_egg", () -> new ForgeSpawnEggItem(type, foreground, background, new Item.Properties()));
+        ITEMS.register(name+"_spawn_egg", () -> new ForgeSpawnEggItem(type, background, foreground, new Item.Properties()));
         return type;
     }
 

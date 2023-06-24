@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoulFireBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -67,7 +68,7 @@ public class SmallSoulFireball extends Fireball {
             if (!(entity instanceof Mob) || ForgeEventFactory.getMobGriefingEvent(this.level(), entity)) {
                 BlockPos blockpos = p_37384_.getBlockPos().relative(p_37384_.getDirection());
                 if (this.level().isEmptyBlock(blockpos)) {
-                    this.level().setBlockAndUpdate(blockpos, SoulFireBlock.getState(this.level(), blockpos));
+                    this.level().setBlockAndUpdate(blockpos, Blocks.SOUL_FIRE.defaultBlockState());
                 }
             }
 

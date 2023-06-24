@@ -35,7 +35,7 @@ public abstract class MixinWitherSkeleton extends AbstractSkeleton {
         HashMap<Enchantment, Integer> enchs = Maps.newHashMap();
         enchs.put(MineplunderEnchantments.DECAY.get(), 1);
         EnchantmentHelper.setEnchantments(enchs, sword);
-        sword.setHoverName(TextUtils.translatableComponent("item.mineplunder.witherblade.name", "Witherblade"));
+        sword.setHoverName(TextUtils.translatableComponent("item.mineplunder.witherblade", "Witherblade"));
         setItemSlot(EquipmentSlot.MAINHAND, sword);
     }
 

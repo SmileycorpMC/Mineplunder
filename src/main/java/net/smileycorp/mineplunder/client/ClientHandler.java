@@ -28,7 +28,6 @@ public class ClientHandler {
 		ClientLevel level = Minecraft.getInstance().level;
 		if (level == null) return;
 		Entity e = message.getEntity(level);
-		Mineplunder.logInfo(e);
 		SpecialFire.setFireType(e, message.getType());
 	}
 }

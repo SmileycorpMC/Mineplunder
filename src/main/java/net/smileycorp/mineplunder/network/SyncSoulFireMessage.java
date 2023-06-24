@@ -32,7 +32,7 @@ public class SyncSoulFireMessage extends AbstractMessage {
 	@Override
 	public void write(FriendlyByteBuf buf){
 		buf.writeInt(entity);
-		buf.writeByte(type.getID());
+		buf.writeByte(type == null ? 0 : type.getID());
 	}
 
 	public Entity getEntity(Level level) {

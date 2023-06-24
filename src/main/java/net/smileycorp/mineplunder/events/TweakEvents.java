@@ -112,7 +112,8 @@ public class TweakEvents {
 			BlockHitResult blockHit = (BlockHitResult) hit;
 			BlockPos pos = blockHit.getBlockPos().relative(blockHit.getDirection());
 			if (level.getBlockState(pos).isAir()) {
-				level.setBlockAndUpdate(pos, (SpecialFire.getFireType(entity) == SpecialFire.FireType.SOUL_FIRE ? Blocks.SOUL_FIRE : Blocks.FIRE).defaultBlockState());
+				SpecialFire.FireType type = SpecialFire.getFireType(entity);
+				level.setBlockAndUpdate(pos, (type == null ? Blocks.FIRE : type.getBlock()).defaultBlockState());
 			}
 		} if (hit instanceof EntityHitResult) {
 			Entity hitEntity = ((EntityHitResult) hit).getEntity();

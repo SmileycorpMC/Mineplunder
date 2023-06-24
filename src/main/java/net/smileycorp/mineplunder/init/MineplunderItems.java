@@ -22,9 +22,15 @@ public class MineplunderItems {
     public static final RegistryObject<Item> SOUL_CHARGE = ITEMS.register("soul_charge", SoulChargeItem::new);
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(CreativeModeTabs.INGREDIENTS) ||
-                event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(CreativeModeTabs.SEARCH))
+        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(CreativeModeTabs.SEARCH))
             for (RegistryObject<Item> item : ITEMS.getEntries()) event.accept(item.get());
+        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(CreativeModeTabs.INGREDIENTS)) {
+            event.accept(SOUL_POWDER);
+            event.accept(SOUL_ROD);
+        }
+        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(CreativeModeTabs.TOOLS_AND_UTILITIES)) {
+            event.accept(SOUL_CHARGE);
+        }
     }
 
 

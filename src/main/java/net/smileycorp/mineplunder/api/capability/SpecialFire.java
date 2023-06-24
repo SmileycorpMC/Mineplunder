@@ -6,9 +6,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FireBlock;
 import net.minecraftforge.common.util.LazyOptional;
-import net.smileycorp.mineplunder.Mineplunder;
 import net.smileycorp.mineplunder.MineplunderDamageSources;
 import net.smileycorp.mineplunder.init.MineplunderBlocks;
 
@@ -47,26 +45,32 @@ public interface SpecialFire {
 
     enum FireType {
 
-        SOUL_FIRE("minecraft:block/soul_fire", (getter)->{
+        SOUL_FIRE("minecraft:block/soul_fire", true, (getter)->{
             getter.source = MineplunderDamageSources.soulFire(getter.entity);
             getter.damage *= 2;
         }, () -> Blocks.SOUL_FIRE),
-        NECROFIRE("mineplunder:block/necrofire", (getter)->{
+        NECROFIRE("mineplunder:block/necrofire", false, (getter)->{
             getter.source = MineplunderDamageSources.necrofire(getter.entity);
         }, MineplunderBlocks.NECROFIRE::get);
 
         private final String texture;
+        private final boolean canBeExtinguished;
         private final Consumer<FireDamageGetter> consumer;
         private final Supplier<Block> block;
 
-        FireType(String texture, Consumer<FireDamageGetter> consumer, Supplier<Block> block) {
+        FireType(String texture, boolean canBeExtinguished, Consumer<FireDamageGetter> consumer, Supplier<Block> block) {
             this.texture = texture;
+            this.canBeExtinguished = canBeExtinguished;
             this.consumer = consumer;
             this.block = block;
         }
 
         public ResourceLocation getTexture(int number) {
             return new ResourceLocation(texture + "_" + number);
+        }
+
+        public boolean canBeExtinguished() {
+            return canBeExtinguished;
         }
 
         public void accept(FireDamageGetter getter) {

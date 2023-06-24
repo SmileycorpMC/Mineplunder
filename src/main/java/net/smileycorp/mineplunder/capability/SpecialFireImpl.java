@@ -23,7 +23,7 @@ public class SpecialFireImpl implements SpecialFire {
 
     @Override
     public ByteTag save() {
-        return ByteTag.valueOf(type.getID());
+        return ByteTag.valueOf(type == null ? 0 : type.getID());
     }
 
     @Override

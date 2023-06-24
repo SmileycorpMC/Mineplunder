@@ -12,11 +12,14 @@
 	"entity.mineplunder.infernal_soul":"Infernal Soul",
 	"entity.mineplunder.witherwight":"Witherwight",
 	
-	"item.mineplunder.soul_powder.name":"Soul Powder",
-	"item.mineplunder.soul_rod.name":"Soul Rod",
-	"item.mineplunder.soul_charge.name":"Soul Charge",
+	"item.mineplunder.infernal_soul_spawn_egg":"Spawn Infernal Soul",
+	"item.mineplunder.witherwight_spawn_egg":"Spawn Witherwight",
 	
-	"item.mineplunder.witherblade.name":"Witherblade",
+	"item.mineplunder.soul_powder":"Soul Powder",
+	"item.mineplunder.soul_rod":"Soul Rod",
+	"item.mineplunder.soul_charge":"Soul Charge",
+	
+	"item.mineplunder.witherblade":"Witherblade",
 	
 	"enchantment.mineplunder.soulblaze":"Soulblaze",
 	"enchantment.mineplunder.soulblaze.desc": "Sets attacked mobs alight with soulfire, deals more damage than regular fire, but powers up certain mobs.",

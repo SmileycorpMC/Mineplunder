@@ -7,7 +7,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.smileycorp.mineplunder.Constants;
 import net.smileycorp.mineplunder.blocks.NecroFireBlock;
-import net.smileycorp.mineplunder.items.SoulChargeItem;
 
 public class MineplunderBlocks {
 
