@@ -9,10 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.CandleCakeBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -32,7 +29,7 @@ public class SoulChargeItem extends Item {
             blockpos = blockpos.relative(p_41204_.getClickedFace());
             if (BaseFireBlock.canBePlacedAt(level, blockpos, p_41204_.getHorizontalDirection())) {
                 this.playSound(level, blockpos);
-                level.setBlockAndUpdate(blockpos, BaseFireBlock.getState(level, blockpos));
+                level.setBlock(blockpos, Blocks.SOUL_FIRE.defaultBlockState(), 2);
                 level.gameEvent(p_41204_.getPlayer(), GameEvent.BLOCK_PLACE, blockpos);
                 flag = true;
             }

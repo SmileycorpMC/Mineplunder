@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.smileycorp.mineplunder.api.capability.Reputation;
 import net.smileycorp.mineplunder.api.capability.SpecialFire;
@@ -46,12 +47,18 @@ public class Mineplunder {
 		MineplunderEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderEntities.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MineplunderItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MineplunderParticles.PARTICLES.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	@SubscribeEvent
 	public static void setup(FMLCommonSetupEvent event){
 		//FactionParser.readFactionsFromConfig();
 		PacketHandler.initPackets();
+	}
+
+	@SubscribeEvent
+	public static void loadComplete(FMLLoadCompleteEvent event) {
+		MineplunderItems.registerDispenserBehaviour();
 	}
 
 	@SubscribeEvent

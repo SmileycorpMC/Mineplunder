@@ -4,12 +4,13 @@
 	"compatibilityLevel": "JAVA_17",
 	"refmap": "mineplunder.refmap.json",
 	"mixins": [
-      "MixinBaseFireBlock",
-      "MixinBuiltInPackSource",
-      "MixinCampfireBlock",
-      "MixinEntity",
-      "MixinLivingEntity",
-      "MixinWitherSkeleton"
+      	"MixinBaseFireBlock",
+      	"MixinBuiltInPackSource",
+      	"MixinCampfireBlock",
+	  	"MixinEntity",
+      	"MixinLivingEntity",
+		"MixinSoulFireBlock",
+      	"MixinWitherSkeleton"
     ],
 	"client": [
 		"MixinEntityRenderDispatcher",

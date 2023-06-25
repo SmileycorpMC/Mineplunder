@@ -54,10 +54,10 @@ public abstract class MixinEntity {
     }
 
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    public boolean hurt(Entity instance, DamageSource source, float amount) {
-        SpecialFire.FireType type = SpecialFire.getFireType((Entity) (Object) this);
+    public boolean hurt(Entity entity, DamageSource source, float amount) {
+        SpecialFire.FireType type = SpecialFire.getFireType(entity);
         if (type != null && source == damageSources().onFire()) {
-            SpecialFire.FireDamageGetter getter = new SpecialFire.FireDamageGetter(source, amount, (Entity) (Object)this);
+            SpecialFire.FireDamageGetter getter = new SpecialFire.FireDamageGetter(source, amount, entity);
             type.accept(getter);
             source = getter.getSource();
             amount = getter.getAmount();

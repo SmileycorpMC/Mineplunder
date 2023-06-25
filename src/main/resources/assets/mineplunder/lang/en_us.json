@@ -8,12 +8,16 @@
 	
 	"death.attack.soulFire":"%1$s was consumed by a torrent of soulfire.",
 	"death.attack.soulFire.player":"%1$s was consumed by a torrent of soulfire.",
+	"death.attack.necrofire":"%1$s was consumed by death.",
+	"death.attack.necrofire.player":"%1$s was consumed by death",
 	
 	"entity.mineplunder.infernal_soul":"Infernal Soul",
 	"entity.mineplunder.witherwight":"Witherwight",
+	"entity.mineplunder.skelliger":"Skelliger",
 	
 	"item.mineplunder.infernal_soul_spawn_egg":"Spawn Infernal Soul",
 	"item.mineplunder.witherwight_spawn_egg":"Spawn Witherwight",
+	"item.mineplunder.skelliger_spawn_egg":"Spawn Skelliger",
 	
 	"item.mineplunder.soul_powder":"Soul Powder",
 	"item.mineplunder.soul_rod":"Soul Rod",

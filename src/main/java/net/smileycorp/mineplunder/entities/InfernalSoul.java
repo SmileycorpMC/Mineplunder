@@ -58,11 +58,11 @@ public class InfernalSoul extends Blaze {
                 this.level().playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
             }
 
-            for(int i = 0; i < 5; ++i) {
+            for(int i = 0; i < 3; ++i) {
                 this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.8D), this.getRandomY(), this.getRandomZ(0.8D), 0.0D, 0.05D, 0.0D);
             }
         }
-        if (!level().isClientSide) super.aiStep();
+        super.aiStep();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -127,7 +127,7 @@ public class InfernalSoul extends Blaze {
                                 this.blaze.level().levelEvent((Player)null, 1018, this.blaze.blockPosition(), 0);
                             }
 
-                            for(int i = 0; i < 1; ++i) {
+                            for(int i = 0; i < 3; ++i) {
                                 SmallSoulFireball smallfireball = new SmallSoulFireball(this.blaze.level(), this.blaze, this.blaze.getRandom().triangle(d1, 2.297D * d4), d2, this.blaze.getRandom().triangle(d3, 2.297D * d4));
                                 smallfireball.setPos(smallfireball.getX(), this.blaze.getY(0.5D) + 0.5D, smallfireball.getZ());
                                 smallfireball.setItem(new ItemStack(MineplunderItems.SOUL_CHARGE.get()));

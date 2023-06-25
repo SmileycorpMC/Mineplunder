@@ -1,4 +1,4 @@
-package net.smileycorp.mineplunder.client.renderer;
+package net.smileycorp.mineplunder.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;

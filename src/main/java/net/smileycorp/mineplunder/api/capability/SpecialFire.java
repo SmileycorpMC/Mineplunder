@@ -86,8 +86,8 @@ public interface SpecialFire {
         }
 
         public static FireType get(byte i) {
-            if (i < 0 || i > values().length) return null;
-            return values()[i+1];
+            if (i <= 0 || i > values().length-1) return null;
+            return values()[i-1];
         }
 
     }
@@ -102,6 +102,7 @@ public interface SpecialFire {
         public FireDamageGetter(DamageSource source, float damage, Entity entity) {
             this.source = source;
             this.damage = damage;
+            this.entity = entity;
         }
 
         public DamageSource getSource() {
