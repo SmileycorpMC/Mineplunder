@@ -1,8 +1,8 @@
 package net.smileycorp.mineplunder.client.renderer;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.smileycorp.mineplunder.Constants;
 import net.smileycorp.mineplunder.client.renderer.layer.SkelligerEyesLayer;

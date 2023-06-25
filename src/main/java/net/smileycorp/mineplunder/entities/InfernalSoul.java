@@ -3,8 +3,10 @@ package net.smileycorp.mineplunder.entities;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -14,7 +16,6 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -36,6 +37,10 @@ public class InfernalSoul extends Blaze {
 
     public InfernalSoul(Level level) {
         this(MineplunderEntities.INFERNAL_SOUL.get(), level);
+    }
+
+    protected float getStandingEyeHeight(Pose p_34186_, EntityDimensions p_34187_) {
+        return 1.3F;
     }
 
     protected void registerGoals() {
@@ -106,7 +111,7 @@ public class InfernalSoul extends Blaze {
                     this.blaze.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0D);
                 } else if (d0 < this.getFollowDistance() * this.getFollowDistance() && flag) {
                     double d1 = livingentity.getX() - this.blaze.getX();
-                    double d2 = livingentity.getY(0.5D) - this.blaze.getY(0.5D);
+                    double d2 = livingentity.getY(0.5D) - this.blaze.getY(0.3D);
                     double d3 = livingentity.getZ() - this.blaze.getZ();
                     if (this.attackTime <= 0) {
                         ++this.attackStep;
@@ -127,9 +132,9 @@ public class InfernalSoul extends Blaze {
                                 this.blaze.level().levelEvent((Player)null, 1018, this.blaze.blockPosition(), 0);
                             }
 
-                            for(int i = 0; i < 3; ++i) {
+                            for(int i = 0; i < 5; ++i) {
                                 SmallSoulFireball smallfireball = new SmallSoulFireball(this.blaze.level(), this.blaze, this.blaze.getRandom().triangle(d1, 2.297D * d4), d2, this.blaze.getRandom().triangle(d3, 2.297D * d4));
-                                smallfireball.setPos(smallfireball.getX(), this.blaze.getY(0.5D) + 0.5D, smallfireball.getZ());
+                                smallfireball.setPos(smallfireball.getX(), this.blaze.getY(0.3D) + 0.5D, smallfireball.getZ());
                                 smallfireball.setItem(new ItemStack(MineplunderItems.SOUL_CHARGE.get()));
                                 this.blaze.level().addFreshEntity(smallfireball);
                             }

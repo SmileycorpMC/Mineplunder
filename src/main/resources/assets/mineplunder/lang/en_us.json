@@ -13,10 +13,12 @@
 	
 	"entity.mineplunder.infernal_soul":"Infernal Soul",
 	"entity.mineplunder.witherwight":"Witherwight",
+	"entity.mineplunder.necromancer":"Necromancer",
 	"entity.mineplunder.skelliger":"Skelliger",
 	
 	"item.mineplunder.infernal_soul_spawn_egg":"Spawn Infernal Soul",
 	"item.mineplunder.witherwight_spawn_egg":"Spawn Witherwight",
+	"item.mineplunder.necromancer_spawn_egg":"Spawn Necromancer",
 	"item.mineplunder.skelliger_spawn_egg":"Spawn Skelliger",
 	
 	"item.mineplunder.soul_powder":"Soul Powder",

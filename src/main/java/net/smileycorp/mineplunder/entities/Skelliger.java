@@ -1,27 +1,22 @@
 package net.smileycorp.mineplunder.entities;
 
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Vex;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
+import javax.annotation.Nullable;
 
-public class Skelliger extends AbstractSkeleton implements TraceableEntity {
-
-    protected Entity owner;
-
-    protected int spawnTicks;
+public class Skelliger extends NecromancerMinion implements RangedAttackMob {
 
     public Skelliger(Level level) {
         this(MineplunderEntities.SKELLIGER.get(), level);
@@ -32,7 +27,36 @@ public class Skelliger extends AbstractSkeleton implements TraceableEntity {
     }
 
     protected void populateDefaultEquipmentSlots(RandomSource p_219154_, DifficultyInstance p_219155_) {
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
+        switch (random.nextInt(6)) {
+            case 0:
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_AXE));
+                break;
+            case 1:
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_HOE));
+                break;
+            case 2:
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
+                break;
+            case 3:
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+                break;
+            case 4:
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
+                break;
+            case 5:
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BONE));
+                break;
+        }
+    }
+
+    @Nullable
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_32146_, DifficultyInstance p_32147_, MobSpawnType p_32148_, @Nullable SpawnGroupData p_32149_, @Nullable CompoundTag p_32150_) {
+        p_32149_ = super.finalizeSpawn(p_32146_, p_32147_, p_32148_, p_32149_, p_32150_);
+        RandomSource randomsource = p_32146_.getRandom();
+        this.populateDefaultEquipmentSlots(randomsource, p_32147_);
+        this.populateDefaultEquipmentEnchantments(randomsource, p_32147_);
+        this.setCanPickUpLoot(randomsource.nextFloat() < 0.55F * p_32147_.getSpecialMultiplier());
+        return p_32149_;
     }
 
     protected SoundEvent getAmbientSound() {
@@ -47,31 +71,20 @@ public class Skelliger extends AbstractSkeleton implements TraceableEntity {
         return SoundEvents.SKELETON_DEATH;
     }
 
+    @Override
+    public int getReanimationTime() {
+        return 60;
+    }
+
+    @Override
+    public int getDispelTime() {
+        return 60;
+    }
+
     protected SoundEvent getStepSound() {
         return SoundEvents.SKELETON_STEP;
     }
 
-
-    public void aiStep() {
-        if (level().isClientSide) {
-           level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0, 0.0D);
-        }
-        super.aiStep();
-    }
-
-    @Nullable
     @Override
-    public Entity getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Entity entity) {
-
-    }
-
-    @Override
-    public boolean hurt(DamageSource source, float amount) {
-        if (spawnTicks > 0) return false;
-        return super.hurt(source, amount);
-    }
+    public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {}
 }

@@ -25,7 +25,7 @@ public interface SpecialFire {
     void load(ByteTag tag);
 
     static void setFireType(Entity entity, FireType type) {
-        if (entity == null || entity.fireImmune()) return;
+        if (entity == null) return;
         LazyOptional<SpecialFire> cap = entity.getCapability(MineplunderCapabilities.SPECIAL_FIRE_CAPABILITY);
         if (!cap.isPresent()) return;
         cap.resolve().get().setFireType(type, entity);

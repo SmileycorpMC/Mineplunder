@@ -5,10 +5,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Evoker;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,10 +17,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.smileycorp.mineplunder.Constants;
-import net.smileycorp.mineplunder.entities.InfernalSoul;
-import net.smileycorp.mineplunder.entities.Skelliger;
-import net.smileycorp.mineplunder.entities.SmallSoulFireball;
-import net.smileycorp.mineplunder.entities.Witherwight;
+import net.smileycorp.mineplunder.entities.*;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MineplunderEntities {
@@ -29,11 +26,15 @@ public class MineplunderEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Constants.MODID);
 
     public static final RegistryObject<EntityType<InfernalSoul>> INFERNAL_SOUL = register("infernal_soul", 0x014074, 0x74F1F5,
-            EntityType.Builder.<InfernalSoul>of(InfernalSoul::new, MobCategory.MONSTER).sized(0.72F, 2F).fireImmune()
+            EntityType.Builder.<InfernalSoul>of(InfernalSoul::new, MobCategory.MONSTER).sized(0.8F, 2F).fireImmune()
                     .clientTrackingRange(8));
 
     public static final RegistryObject<EntityType<Witherwight>> WITHERWIGHT = register("witherwight", 0x0D2A4C, 0x00131D,
             EntityType.Builder.<Witherwight>of(Witherwight::new, MobCategory.MONSTER).sized(0.6F, 1.99F).fireImmune()
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<Necromancer>> NECROMANCER = register("necromancer", 0x3FD300, 0x1A0000,
+            EntityType.Builder.<Necromancer>of(Necromancer::new, MobCategory.MONSTER).sized(0.6F, 1.95F)
                     .clientTrackingRange(8));
 
     public static final RegistryObject<EntityType<Skelliger>> SKELLIGER = register("skelliger", 0x3FD300, 0xA5A5A5,
@@ -54,6 +55,7 @@ public class MineplunderEntities {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(INFERNAL_SOUL.get(), InfernalSoul.createAttributes().build());
         event.put(WITHERWIGHT.get(), AbstractSkeleton.createAttributes().build());
+        event.put(NECROMANCER.get(), Evoker.createAttributes().build());
         event.put(SKELLIGER.get(), AbstractSkeleton.createAttributes().build());
     }
 
