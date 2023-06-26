@@ -17,7 +17,6 @@ import net.smileycorp.mineplunder.client.renderer.NecromancerRenderer;
 import net.smileycorp.mineplunder.client.renderer.SkelligerRenderer;
 import net.smileycorp.mineplunder.client.renderer.model.InfernalSoulModel;
 import net.smileycorp.mineplunder.client.renderer.model.SkelligerModel;
-import net.smileycorp.mineplunder.entities.Necromancer;
 import net.smileycorp.mineplunder.init.MineplunderBlocks;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderParticles;

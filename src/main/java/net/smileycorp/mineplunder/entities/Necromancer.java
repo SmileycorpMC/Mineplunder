@@ -1,18 +1,30 @@
 package net.smileycorp.mineplunder.entities;
 
 import com.google.common.collect.Lists;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.SpellcasterIllager;
+import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
+import net.smileycorp.mineplunder.entities.ai.SummonSkelligerSpell;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderParticles;
 
@@ -20,7 +32,7 @@ import java.util.List;
 
 public class Necromancer extends AbstractIllager {
 
-    private static final EntityDataAccessor<Boolean> SPELLCASTING = SynchedEntityData.defineId(Necromancer.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> SPELLCASTING= SynchedEntityData.defineId(Necromancer.class, EntityDataSerializers.BOOLEAN);
 
     protected final List<NecromancerMinion> minions = Lists.newArrayList();
 
@@ -34,7 +46,21 @@ public class Necromancer extends AbstractIllager {
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(SPELLCASTING, false);
+        entityData.define(SPELLCASTING, false);
+    }
+
+    protected void registerGoals() {
+        super.registerGoals();
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
+        goalSelector.addGoal(5, new SummonSkelligerSpell(this));
+        goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
+        goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
+        goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+        targetSelector.addGoal(1, new HurtByTargetGoal(this, Raider.class).setAlertOthers());
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true).setUnseenMemoryTicks(300));
+        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false).setUnseenMemoryTicks(300));
+        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
     }
 
     public void tick() {
@@ -46,7 +72,6 @@ public class Necromancer extends AbstractIllager {
             level().addParticle(MineplunderParticles.NECROFLAME.get(), this.getX() + (double)f1 * 0.6D, this.getY() + 1.8D, this.getZ() + (double)f2 * 0.6D, 0, 0, 0);
             level().addParticle(MineplunderParticles.NECROFLAME.get(), this.getX() - (double)f1 * 0.6D, this.getY() + 1.8D, this.getZ() - (double)f2 * 0.6D, 0, 0, 0);
         }
-
     }
 
     public void die(DamageSource source) {
@@ -58,6 +83,8 @@ public class Necromancer extends AbstractIllager {
         minions.add(minion);
         minion.setOwner(this);
         minion.reanimate();
+        minion.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(minion.getOnPos()), MobSpawnType.REINFORCEMENT, null, null);
+        level().addFreshEntity(minion);
     }
 
     @Override
@@ -66,6 +93,10 @@ public class Necromancer extends AbstractIllager {
     @Override
     public SoundEvent getCelebrateSound() {
         return SoundEvents.EVOKER_CELEBRATE;
+    }
+
+    public void setSpellcasting(boolean spellcasting) {
+        entityData.set(SPELLCASTING, spellcasting);
     }
 
     public boolean isCastingSpell() {
@@ -77,4 +108,5 @@ public class Necromancer extends AbstractIllager {
         if (isCelebrating()) return IllagerArmPose.CELEBRATING;
         return IllagerArmPose.CROSSED;
     }
+
 }
