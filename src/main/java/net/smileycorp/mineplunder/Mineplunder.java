@@ -59,6 +59,7 @@ public class Mineplunder {
 	@SubscribeEvent
 	public static void loadComplete(FMLLoadCompleteEvent event) {
 		MineplunderItems.registerDispenserBehaviour();
+		MineplunderEntities.addRaidMobs();
 	}
 
 	@SubscribeEvent

@@ -6,8 +6,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Evoker;
+import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -41,6 +43,10 @@ public class MineplunderEntities {
             EntityType.Builder.<Skelliger>of(Skelliger::new, MobCategory.MONSTER).sized(0.6F, 1.99F)
                     .clientTrackingRange(8));
 
+    public static final RegistryObject<EntityType<Marauder>> MARAUDER = register("marauder", 0x959B9B, 0x040F22,
+            EntityType.Builder.<Marauder>of(Marauder::new, MobCategory.MONSTER).sized(0.6F, 1.95F)
+                    .clientTrackingRange(8));
+
     public static final RegistryObject<EntityType<SmallSoulFireball>> SMALL_SOUL_FIREBALL = ENTITIES.register("blue_soul_fireball",
             ()->EntityType.Builder.<SmallSoulFireball>of(SmallSoulFireball::new, MobCategory.MISC).sized(0.3125F, 0.3125F)
                     .clientTrackingRange(4).updateInterval(10).build("blue_soul_fireball"));
@@ -51,12 +57,17 @@ public class MineplunderEntities {
         return type;
     }
 
+    public static void addRaidMobs() {
+        Raid.RaiderType.create("NECROMANCER", NECROMANCER.get(), new int[]{0, 0, 0, 1, 0, 1, 1, 2});
+    }
+
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(INFERNAL_SOUL.get(), InfernalSoul.createAttributes().build());
         event.put(WITHERWIGHT.get(), AbstractSkeleton.createAttributes().build());
         event.put(NECROMANCER.get(), Evoker.createAttributes().build());
         event.put(SKELLIGER.get(), AbstractSkeleton.createAttributes().build());
+        event.put(MARAUDER.get(), Marauder.createAttributes().build());
     }
 
     @SubscribeEvent

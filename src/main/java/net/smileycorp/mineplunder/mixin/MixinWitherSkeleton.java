@@ -1,6 +1,7 @@
 package net.smileycorp.mineplunder.mixin;
 
 import com.google.common.collect.Maps;
+import net.minecraft.ChatFormatting;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -35,7 +36,8 @@ public abstract class MixinWitherSkeleton extends AbstractSkeleton {
         HashMap<Enchantment, Integer> enchs = Maps.newHashMap();
         enchs.put(MineplunderEnchantments.DECAY.get(), 1);
         EnchantmentHelper.setEnchantments(enchs, sword);
-        sword.setHoverName(TextUtils.translatableComponent("item.mineplunder.witherblade", "Witherblade"));
+        sword.setHoverName(TextUtils.translatableComponent("item.mineplunder.witherblade", "Witherblade")
+                .withStyle(ChatFormatting.DARK_PURPLE));
         setItemSlot(EquipmentSlot.MAINHAND, sword);
     }
 

@@ -18,6 +18,7 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -66,7 +67,10 @@ public abstract class NecromancerMinion extends Monster {
     public void aiStep() {
         if (animTime > 0 &! level().isClientSide) {
             animTime--;
-            if (animTime <= 0 && getAnimState() == AnimState.DISPELLING) remove(RemovalReason.DISCARDED);
+            if (animTime <= 0) {
+                if(getAnimState() == AnimState.DISPELLING) remove(RemovalReason.DISCARDED);
+                setAnimState(AnimState.NONE);
+            }
         }
         if (level().isClientSide && getAnimState() == AnimState.NONE) {
             if (tickCount % 4 == 0) level().addParticle(MineplunderParticles.NECROFLAME.get(),

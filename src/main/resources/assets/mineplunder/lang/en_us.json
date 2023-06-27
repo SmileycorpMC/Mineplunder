@@ -15,17 +15,20 @@
 	"entity.mineplunder.witherwight":"Witherwight",
 	"entity.mineplunder.necromancer":"Necromancer",
 	"entity.mineplunder.skelliger":"Skelliger",
+	"entity.mineplunder.marauder":"Marauder",
 	
 	"item.mineplunder.infernal_soul_spawn_egg":"Spawn Infernal Soul",
 	"item.mineplunder.witherwight_spawn_egg":"Spawn Witherwight",
 	"item.mineplunder.necromancer_spawn_egg":"Spawn Necromancer",
 	"item.mineplunder.skelliger_spawn_egg":"Spawn Skelliger",
+	"item.mineplunder.marauder_spawn_egg":"Spawn Marauder",
 	
 	"item.mineplunder.soul_powder":"Soul Powder",
 	"item.mineplunder.soul_rod":"Soul Rod",
 	"item.mineplunder.soul_charge":"Soul Charge",
 	
 	"item.mineplunder.witherblade":"Witherblade",
+	"item.mineplunder.marauder_shield":"Marauder Shield",
 	
 	"enchantment.mineplunder.soulblaze":"Soulblaze",
 	"enchantment.mineplunder.soulblaze.desc": "Sets attacked mobs alight with soulfire, deals more damage than regular fire, but powers up certain mobs.",

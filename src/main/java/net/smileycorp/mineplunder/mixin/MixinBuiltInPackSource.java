@@ -23,7 +23,7 @@ public class MixinBuiltInPackSource {
 	private void loadPacks(Consumer<Pack> packConsumer, CallbackInfo callback) {
 		Path pack = FMLPaths.GAMEDIR.get().resolve("config").resolve("mineplunder");
 		PathPackResources resources = new PathPackResources("mineplunder-config", true, pack);
-		packConsumer.accept(Pack.readMetaAndCreate("mineplunder-config", Component.literal("Mineplunder Config"), false,
+		packConsumer.accept(Pack.readMetaAndCreate("mineplunder-config", Component.literal("Mineplunder Config"), true,
 				(str)->resources, (Object)this instanceof ClientPackSource ? PackType.CLIENT_RESOURCES : PackType.SERVER_DATA, Pack.Position.TOP, PackSource.BUILT_IN));
 	}
 

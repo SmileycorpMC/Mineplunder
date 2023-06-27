@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -24,10 +25,12 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.smileycorp.mineplunder.entities.ai.SummonSkelligerSpell;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderParticles;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class Necromancer extends AbstractIllager {
@@ -93,6 +96,18 @@ public class Necromancer extends AbstractIllager {
     @Override
     public SoundEvent getCelebrateSound() {
         return SoundEvents.EVOKER_CELEBRATE;
+    }
+
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.EVOKER_AMBIENT;
+    }
+
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.EVOKER_DEATH;
+    }
+
+    protected SoundEvent getHurtSound(DamageSource p_32654_) {
+        return SoundEvents.EVOKER_HURT;
     }
 
     public void setSpellcasting(boolean spellcasting) {

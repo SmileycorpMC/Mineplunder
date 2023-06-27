@@ -11,12 +11,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.smileycorp.mineplunder.Constants;
 import net.smileycorp.mineplunder.client.particle.NecroFlameProvider;
-import net.smileycorp.mineplunder.client.renderer.ClothedSkeletonRenderer;
-import net.smileycorp.mineplunder.client.renderer.InfernalSoulRenderer;
-import net.smileycorp.mineplunder.client.renderer.NecromancerRenderer;
-import net.smileycorp.mineplunder.client.renderer.SkelligerRenderer;
+import net.smileycorp.mineplunder.client.renderer.*;
 import net.smileycorp.mineplunder.client.renderer.model.InfernalSoulModel;
 import net.smileycorp.mineplunder.client.renderer.model.SkelligerModel;
+import net.smileycorp.mineplunder.entities.Necromancer;
 import net.smileycorp.mineplunder.init.MineplunderBlocks;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderParticles;
@@ -38,6 +36,8 @@ public class ClientEventRegister {
                 ctx -> new ClothedSkeletonRenderer(ctx, Constants.loc("textures/entity/nether_mob/witherwight.png")));
         event.registerEntityRenderer(MineplunderEntities.NECROMANCER.get(), NecromancerRenderer::new);
         event.registerEntityRenderer(MineplunderEntities.SKELLIGER.get(), SkelligerRenderer::new);
+        event.registerEntityRenderer(MineplunderEntities.MARAUDER.get(), ctx ->
+                new MPIllagerRenderer<>(ctx, Constants.loc("textures/entity/illager/marauder.png")));
         event.registerEntityRenderer(MineplunderEntities.SMALL_SOUL_FIREBALL.get(),
                 ctx -> new ThrownItemRenderer<>(ctx, 0.75F, true));
     }

@@ -10,16 +10,12 @@ import net.smileycorp.mineplunder.client.renderer.layer.NecromancerBookLayer;
 import net.smileycorp.mineplunder.client.renderer.layer.NecromancerEyesLayer;
 import net.smileycorp.mineplunder.entities.Necromancer;
 
-public class NecromancerRenderer extends IllagerRenderer<Necromancer> {
+public class NecromancerRenderer extends MPIllagerRenderer<Necromancer> {
 
     public NecromancerRenderer(EntityRendererProvider.Context ctx) {
-        super(ctx, new IllagerModel<Necromancer>(ctx.bakeLayer(ModelLayers.EVOKER)), 0.5F);
+        super(ctx, Constants.loc("textures/entity/illager/necromancer.png"));
         addLayer(new NecromancerEyesLayer(this));
         addLayer(new NecromancerBookLayer(this, ctx.getModelSet()));
-        model.getHat().visible = true;
     }
 
-    public ResourceLocation getTextureLocation(Necromancer entity) {
-        return Constants.loc("textures/entity/illager/necromancer.png");
-    }
 }
