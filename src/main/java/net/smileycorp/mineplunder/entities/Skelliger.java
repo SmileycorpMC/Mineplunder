@@ -73,12 +73,12 @@ public class Skelliger extends NecromancerMinion implements RangedAttackMob {
 
     @Override
     public int getReanimationTime() {
-        return 60;
+        return 20;
     }
 
     @Override
     public int getDispelTime() {
-        return 60;
+        return 20;
     }
 
     protected SoundEvent getStepSound() {

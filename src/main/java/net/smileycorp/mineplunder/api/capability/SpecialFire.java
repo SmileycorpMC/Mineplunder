@@ -45,20 +45,22 @@ public interface SpecialFire {
 
     enum FireType {
 
-        SOUL_FIRE("minecraft:block/soul_fire", true, (getter)->{
+        SOUL_FIRE((byte)1,"minecraft:block/soul_fire", true, (getter)->{
             getter.source = MineplunderDamageSources.soulFire(getter.entity);
             getter.damage *= 2;
         }, () -> Blocks.SOUL_FIRE),
-        NECROFIRE("mineplunder:block/necrofire", false, (getter)->{
+        NECROFIRE((byte)2,"mineplunder:block/necrofire", false, (getter)->{
             getter.source = MineplunderDamageSources.necrofire(getter.entity);
         }, MineplunderBlocks.NECROFIRE::get);
 
+        private final byte id;
         private final String texture;
         private final boolean canBeExtinguished;
         private final Consumer<FireDamageGetter> consumer;
         private final Supplier<Block> block;
 
-        FireType(String texture, boolean canBeExtinguished, Consumer<FireDamageGetter> consumer, Supplier<Block> block) {
+        FireType(byte id, String texture, boolean canBeExtinguished, Consumer<FireDamageGetter> consumer, Supplier<Block> block) {
+            this.id = id;
             this.texture = texture;
             this.canBeExtinguished = canBeExtinguished;
             this.consumer = consumer;
@@ -82,12 +84,13 @@ public interface SpecialFire {
         }
 
         public byte getID() {
-            return (byte)(ordinal() + 1);
+            return id;
         }
 
         public static FireType get(byte i) {
-            if (i <= 0 || i > values().length-1) return null;
-            return values()[i-1];
+            if (i <= 0) return null;
+            for (FireType type : FireType.values()) if (type.getID() == i) return type;
+            return null;
         }
 
     }

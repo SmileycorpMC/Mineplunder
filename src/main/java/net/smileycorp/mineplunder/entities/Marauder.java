@@ -148,7 +148,7 @@ public class Marauder extends AbstractIllager {
 
     @Override
     public AbstractIllager.IllagerArmPose getArmPose() {
-        if (getTarget() != null) return IllagerArmPose.CROSSBOW_CHARGE;
+        if (getTarget() != null) return IllagerArmPose.BOW_AND_ARROW;
         return isCelebrating() ? AbstractIllager.IllagerArmPose.CELEBRATING : AbstractIllager.IllagerArmPose.NEUTRAL;
     }
 

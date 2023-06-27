@@ -31,6 +31,10 @@ public abstract class NecromancerSpellGoal extends Goal {
         necromancer.setSpellcasting(true);
     }
 
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
     public abstract int getSpellLength();
 
     public void stop() {

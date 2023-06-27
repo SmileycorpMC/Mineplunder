@@ -75,7 +75,7 @@ public class Mineplunder {
 	@SubscribeEvent
 	public void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
 		Entity entity = event.getObject();
-		event.addCapability(Constants.loc("soulfire"), new SpecialFireProvider());
+		event.addCapability(Constants.loc("special_fire"), new SpecialFireProvider());
 		if (entity instanceof Player &!(entity instanceof FakePlayer)) {
 			event.addCapability(Constants.loc("reputation"), new ReputationProvider());
 		}

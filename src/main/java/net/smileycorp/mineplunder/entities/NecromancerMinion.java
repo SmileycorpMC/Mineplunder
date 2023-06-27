@@ -8,10 +8,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.TraceableEntity;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -24,7 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.smileycorp.mineplunder.init.MineplunderParticles;
 
-public abstract class NecromancerMinion extends Monster {
+public abstract class NecromancerMinion extends Monster implements TraceableEntity {
 
     private static final EntityDataAccessor<Byte> ANIM_STATE = SynchedEntityData.defineId(Necromancer.class, EntityDataSerializers.BYTE);
 
@@ -52,6 +50,10 @@ public abstract class NecromancerMinion extends Monster {
         this.entityData.define(ANIM_STATE, (byte)0);
     }
 
+    protected boolean isImmobile() {
+        return super.isImmobile() && getAnimState() == AnimState.NONE;
+    }
+
     public boolean isAlive() {
         return getAnimState() == AnimState.NONE && super.isAlive();
     }
@@ -68,7 +70,7 @@ public abstract class NecromancerMinion extends Monster {
         if (animTime > 0 &! level().isClientSide) {
             animTime--;
             if (animTime <= 0) {
-                if(getAnimState() == AnimState.DISPELLING) remove(RemovalReason.DISCARDED);
+                if(getAnimState() == AnimState.DISPELLING) discard();
                 setAnimState(AnimState.NONE);
             }
         }
@@ -93,6 +95,7 @@ public abstract class NecromancerMinion extends Monster {
     public void dispel() {
         animTime = getDispelTime();
         setAnimState(AnimState.DISPELLING);
+        goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
     }
 
     @Override

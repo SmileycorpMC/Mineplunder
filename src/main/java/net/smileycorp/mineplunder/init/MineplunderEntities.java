@@ -51,6 +51,10 @@ public class MineplunderEntities {
             ()->EntityType.Builder.<SmallSoulFireball>of(SmallSoulFireball::new, MobCategory.MISC).sized(0.3125F, 0.3125F)
                     .clientTrackingRange(4).updateInterval(10).build("blue_soul_fireball"));
 
+    public static final RegistryObject<EntityType<NecrofireProjectile>> NECROFIRE = ENTITIES.register("necrofire",
+            ()->EntityType.Builder.<NecrofireProjectile>of(NecrofireProjectile::new, MobCategory.MISC).sized(1, 1)
+                    .clientTrackingRange(4).updateInterval(10).build("necrofire"));
+
     public static <T extends Mob> RegistryObject<EntityType<T>> register(String name, int foreground, int background, EntityType.Builder<T> builder) {
         RegistryObject<EntityType<T>> type = ENTITIES.register(name, ()->builder.build(name));
         ITEMS.register(name+"_spawn_egg", () -> new ForgeSpawnEggItem(type, background, foreground, new Item.Properties()));
@@ -58,6 +62,7 @@ public class MineplunderEntities {
     }
 
     public static void addRaidMobs() {
+        Raid.RaiderType.create("MARAUDER", MARAUDER.get(), new int[]{1, 2, 2, 3, 4, 3, 3, 5});
         Raid.RaiderType.create("NECROMANCER", NECROMANCER.get(), new int[]{0, 0, 0, 1, 0, 1, 1, 2});
     }
 

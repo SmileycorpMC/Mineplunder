@@ -2,6 +2,7 @@ package net.smileycorp.mineplunder.client;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -40,6 +41,7 @@ public class ClientEventRegister {
                 new MPIllagerRenderer<>(ctx, Constants.loc("textures/entity/illager/marauder.png")));
         event.registerEntityRenderer(MineplunderEntities.SMALL_SOUL_FIREBALL.get(),
                 ctx -> new ThrownItemRenderer<>(ctx, 0.75F, true));
+        event.registerEntityRenderer(MineplunderEntities.NECROFIRE.get(), FakeBlockRenderer::new);
     }
 
     @SubscribeEvent
