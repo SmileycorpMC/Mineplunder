@@ -16,6 +16,10 @@ public abstract class NecromancerSpellGoal extends Goal {
         this.necromancer = necromancer;
     }
 
+    public boolean isInterruptable() {
+        return false;
+    }
+
     public boolean canUse() {
         return !necromancer.isCastingSpell() && necromancer.getTarget() != null;
     }

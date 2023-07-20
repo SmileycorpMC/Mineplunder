@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -19,21 +18,17 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.Evoker;
-import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
+import net.smileycorp.mineplunder.entities.ai.DispelMinionsGoal;
 import net.smileycorp.mineplunder.entities.ai.NecrofireSpell;
 import net.smileycorp.mineplunder.entities.ai.SummonSkelligerSpell;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderParticles;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class Necromancer extends AbstractIllager {
@@ -76,6 +71,8 @@ public class Necromancer extends AbstractIllager {
         super.registerGoals();
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
+        goalSelector.addGoal(2, new AvoidEntityGoal<>(this, IronGolem.class, 8.0F, 0.6D, 1.0D));
+        goalSelector.addGoal(3, new DispelMinionsGoal(this));
         goalSelector.addGoal(4, new SummonSkelligerSpell(this));
         goalSelector.addGoal(5, new NecrofireSpell(this));
         goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
@@ -109,6 +106,10 @@ public class Necromancer extends AbstractIllager {
         minion.reanimate();
         minion.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(minion.getOnPos()), MobSpawnType.REINFORCEMENT, null, null);
         level().addFreshEntity(minion);
+    }
+
+    public List<NecromancerMinion> getMinions() {
+        return minions;
     }
 
     @Override

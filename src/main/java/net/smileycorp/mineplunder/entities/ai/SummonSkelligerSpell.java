@@ -27,7 +27,7 @@ public class SummonSkelligerSpell extends NecromancerSpellGoal {
 
     public void tick() {
         super.tick();
-        if (useTicks == 5) for (int i = 0; i < 3; i++) {
+        if (useTicks == 5) for (int i = 0; i <= necromancer.getRandom().nextInt(4); i++) {
             Skelliger skelliger = new Skelliger(necromancer.level());
             Vec3 dir = DirectionUtils.getRandomDirectionVecXZ(necromancer.getRandom());
             skelliger.setPos(DirectionUtils.getClosestLoadedPos(necromancer.level(), necromancer.position(), dir, 2.5));
