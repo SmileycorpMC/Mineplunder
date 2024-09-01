@@ -18,7 +18,7 @@ import java.nio.file.StandardOpenOption;
 public class FactionParser {
 
 	public static void readFactionsFromConfig() {
-		File directory = FMLPaths.GAMEDIR.get().resolve("config").resolve("piper").toFile();
+		File directory = FMLPaths.GAMEDIR.get().resolve("config").resolve("mineplunder").toFile();
 		if (!(directory.exists() || directory.isDirectory())) {
 			try {
 				createDefaultFiles(directory);

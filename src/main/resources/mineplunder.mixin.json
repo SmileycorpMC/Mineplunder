@@ -5,7 +5,6 @@
 	"refmap": "mineplunder.refmap.json",
 	"mixins": [
       	"MixinBaseFireBlock",
-      	"MixinBuiltInPackSource",
       	"MixinCampfireBlock",
 	  	"MixinEntity",
       	"MixinLivingEntity",
