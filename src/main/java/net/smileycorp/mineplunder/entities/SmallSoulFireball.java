@@ -52,7 +52,7 @@ public class SmallSoulFireball extends Fireball {
             int i = entity.getRemainingFireTicks();
             SpecialFire.setBurning(entity, 100, SpecialFire.FireType.SOUL_FIRE);
             if (!entity.hurt(this.damageSources().fireball(this, owner), 5.0F)) {
-                SpecialFire.setBurning(entity, 1, SpecialFire.FireType.SOUL_FIRE);
+                SpecialFire.setBurning(entity, 3, SpecialFire.FireType.SOUL_FIRE);
             } else if (owner instanceof LivingEntity) {
                 this.doEnchantDamageEffects((LivingEntity)owner, entity);
             }

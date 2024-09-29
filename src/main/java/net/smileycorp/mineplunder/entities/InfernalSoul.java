@@ -1,12 +1,11 @@
 package net.smileycorp.mineplunder.entities;
 
+import com.google.common.base.Predicates;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -19,8 +18,10 @@ import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.smileycorp.atlas.api.util.DirectionUtils;
 import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.capability.InfernalSoulFire;
@@ -29,7 +30,7 @@ import net.smileycorp.mineplunder.init.MineplunderItems;
 
 public class InfernalSoul extends Blaze {
 
-    private final SpecialFire soulfire_capability = new InfernalSoulFire();
+    private final SpecialFire cap = new InfernalSoulFire();
 
     public InfernalSoul(EntityType<? extends InfernalSoul> type, Level level) {
         super(type, level);
@@ -39,35 +40,37 @@ public class InfernalSoul extends Blaze {
         this(MineplunderEntities.INFERNAL_SOUL.get(), level);
     }
 
-    protected float getStandingEyeHeight(Pose p_34186_, EntityDimensions p_34187_) {
-        return 1.3F;
+    protected float getStandingEyeHeight(Pose p_34186_, EntityDimensions dimensions) {
+        return 1.3f;
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(4, new InfernalSoulAttackGoal(this));
-        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D, 0.0F));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        goalSelector.addGoal(4, new InfernalSoulAttackGoal(this));
+        goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1));
+        goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1, 0));
+        goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8));
+        goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
     public void aiStep() {
-        if (!this.onGround() && this.getDeltaMovement().y < 0.0D) {
-            this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
-        }
-
-        if (this.level().isClientSide) {
-            if (this.random.nextInt(24) == 0 && !this.isSilent()) {
-                this.level().playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
-            }
-
-            for(int i = 0; i < 3; ++i) {
-                this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.8D), this.getRandomY(), this.getRandomZ(0.8D), 0.0D, 0.05D, 0.0D);
-            }
+        if (!onGround() && getDeltaMovement().y < 0) setDeltaMovement(getDeltaMovement().multiply(1, 0.6, 1));
+        if (tickCount % 5 == 0) for(Entity entity : level ().getEntities(this, getBoundingBox().inflate(0.5), Predicates
+                .not(Entity::fireImmune)))
+            SpecialFire.setBurning(entity, 60, SpecialFire.FireType.SOUL_FIRE);
+        if (level().isClientSide) {
+            if (random.nextInt(24) == 0 && !isSilent()) level().playLocalSound(getX() + 0.5, getY() + 0.5, getZ() + 0.5,
+                    SoundEvents.BLAZE_BURN, getSoundSource(), 1 + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
+            for(int i = 0; i < 3; ++i) level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getRandomX(0.8), getRandomY(), getRandomZ(0.8),
+                    0, 0, 0);
         }
         super.aiStep();
+    }
+    
+    @Override
+    public boolean isOnFire() {
+        return getTarget() != null;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -76,7 +79,7 @@ public class InfernalSoul extends Blaze {
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        return cap == MineplunderCapabilities.SPECIAL_FIRE_CAPABILITY ? LazyOptional.of(() -> soulfire_capability).cast()
+        return cap == MineplunderCapabilities.SPECIAL_FIRE_CAPABILITY ? LazyOptional.of(() -> this.cap).cast()
                 : super.getCapability(cap, side);
     }
 
@@ -85,68 +88,43 @@ public class InfernalSoul extends Blaze {
         public InfernalSoulAttackGoal(InfernalSoul entity) {
             super(entity);
         }
-
+        
+        @Override
+        public void start() {
+            this.attackStep = 60;
+        }
+        
+        @Override
         public void tick() {
-            --this.attackTime;
-            LivingEntity livingentity = this.blaze.getTarget();
-            if (livingentity != null) {
-                boolean flag = this.blaze.getSensing().hasLineOfSight(livingentity);
-                if (flag) {
-                    this.lastSeen = 0;
-                } else {
-                    ++this.lastSeen;
+            if (attackTime > 0) attackTime--;
+            LivingEntity target = blaze.getTarget();
+            if (target == null) return;
+            if (target.isDeadOrDying()) return;
+            boolean canSeeTarget = blaze.getSensing().hasLineOfSight(target);
+            if (canSeeTarget) lastSeen = 0;
+            else lastSeen++;
+            if (lastSeen > 5) {
+                blaze.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1);
+                return;
+            }
+            blaze.getLookControl().setLookAt(target);
+            if (attackTime > 0 || (attackStep >= 60 &! canSeeTarget)) return;
+            if (attackStep == 60) blaze.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER);
+            if (attackStep <= 40 && attackStep % 10 == 0) {
+                blaze.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE);
+                for (int i = 0; i < 5; ++i) {
+                    RandomSource rand = blaze.getRandom();
+                    Vec3 dir = DirectionUtils.getDirectionVec(blaze.getEyePosition(), blaze.getTarget().getEyePosition());
+                    SmallSoulFireball fireball = new SmallSoulFireball(blaze.level(), blaze, dir.x * (rand.nextFloat() * 0.25),
+                            dir.y * (rand.nextFloat() * 0.25), dir.z * (rand.nextFloat() * 0.25));
+                    fireball.setItem(new ItemStack(MineplunderItems.SOUL_CHARGE.get()));
+                    fireball.setPos(blaze.getX(), blaze.getY() + blaze.getEyeHeight(), blaze.getZ());
+                    blaze.level().addFreshEntity(fireball);
                 }
-
-                double d0 = this.blaze.distanceToSqr(livingentity);
-                if (d0 < 4.0D) {
-                    if (!flag) {
-                        return;
-                    }
-
-                    if (this.attackTime <= 0) {
-                        this.attackTime = 20;
-                        this.blaze.doHurtTarget(livingentity);
-                    }
-
-                    this.blaze.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0D);
-                } else if (d0 < this.getFollowDistance() * this.getFollowDistance() && flag) {
-                    double d1 = livingentity.getX() - this.blaze.getX();
-                    double d2 = livingentity.getY(0.5D) - this.blaze.getY(0.3D);
-                    double d3 = livingentity.getZ() - this.blaze.getZ();
-                    if (this.attackTime <= 0) {
-                        ++this.attackStep;
-                        if (this.attackStep == 1) {
-                            this.attackTime = 60;
-                            this.blaze.setCharged(true);
-                        } else if (this.attackStep <= 4) {
-                            this.attackTime = 6;
-                        } else {
-                            this.attackTime = 100;
-                            this.attackStep = 0;
-                            this.blaze.setCharged(false);
-                        }
-
-                        if (this.attackStep > 1) {
-                            double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
-                            if (!this.blaze.isSilent()) {
-                                this.blaze.level().levelEvent((Player)null, 1018, this.blaze.blockPosition(), 0);
-                            }
-
-                            for(int i = 0; i < 5; ++i) {
-                                SmallSoulFireball smallfireball = new SmallSoulFireball(this.blaze.level(), this.blaze, this.blaze.getRandom().triangle(d1, 2.297D * d4), d2, this.blaze.getRandom().triangle(d3, 2.297D * d4));
-                                smallfireball.setPos(smallfireball.getX(), this.blaze.getY(0.3D) + 0.5D, smallfireball.getZ());
-                                smallfireball.setItem(new ItemStack(MineplunderItems.SOUL_CHARGE.get()));
-                                this.blaze.level().addFreshEntity(smallfireball);
-                            }
-                        }
-                    }
-
-                    this.blaze.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-                } else if (this.lastSeen < 5) {
-                    this.blaze.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0D);
-                }
-
-                super.tick();
+            }
+            if (attackStep-- < 0) {
+                attackStep = 60;
+                attackTime = 120;
             }
         }
     }
