@@ -91,7 +91,7 @@ public class InfernalSoul extends Blaze {
         
         @Override
         public void start() {
-            this.attackStep = 60;
+            this.attackStep = 40;
         }
         
         @Override
@@ -103,28 +103,31 @@ public class InfernalSoul extends Blaze {
             boolean canSeeTarget = blaze.getSensing().hasLineOfSight(target);
             if (canSeeTarget) lastSeen = 0;
             else lastSeen++;
-            if (lastSeen > 5) {
+            if (lastSeen > 5 && attackStep == 40) {
                 blaze.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1);
                 return;
             }
-            blaze.getLookControl().setLookAt(target);
-            if (attackTime > 0 || (attackStep >= 60 &! canSeeTarget)) return;
-            if (attackStep == 60) blaze.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER);
-            if (attackStep <= 40 && attackStep % 10 == 0) {
+            blaze.getLookControl().setLookAt(target, 10, 10);
+            if (attackTime > 0) return;
+            if (attackStep == 40) {
+                if (!canSeeTarget) return;
+                blaze.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER);
+            }
+            if (attackStep <= 20 && attackStep % 5 == 0) {
                 blaze.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE);
                 for (int i = 0; i < 5; ++i) {
                     RandomSource rand = blaze.getRandom();
                     Vec3 dir = DirectionUtils.getDirectionVec(blaze.getEyePosition(), blaze.getTarget().getEyePosition());
-                    SmallSoulFireball fireball = new SmallSoulFireball(blaze.level(), blaze, dir.x * (rand.nextFloat() * 0.25),
-                            dir.y * (rand.nextFloat() * 0.25), dir.z * (rand.nextFloat() * 0.25));
+                    SmallSoulFireball fireball = new SmallSoulFireball(blaze.level(), blaze, dir.x + (rand.nextFloat() - 0.5) * 0.5,
+                            dir.y + (rand.nextFloat() - 0.5) * 0.5, dir.z  + (rand.nextFloat() - 0.5) * 0.5);
                     fireball.setItem(new ItemStack(MineplunderItems.SOUL_CHARGE.get()));
                     fireball.setPos(blaze.getX(), blaze.getY() + blaze.getEyeHeight(), blaze.getZ());
                     blaze.level().addFreshEntity(fireball);
                 }
             }
             if (attackStep-- < 0) {
-                attackStep = 60;
-                attackTime = 120;
+                attackStep = 40;
+                attackTime = 80;
             }
         }
     }
