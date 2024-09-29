@@ -1,8 +1,6 @@
 package net.smileycorp.mineplunder;
 
-import net.minecraft.client.resources.ClientPackSource;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.Entity;
@@ -29,7 +27,6 @@ import net.smileycorp.mineplunder.init.*;
 import net.smileycorp.mineplunder.network.PacketHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.nio.file.Path;
 import java.util.concurrent.Executors;

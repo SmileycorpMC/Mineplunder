@@ -1,26 +1,14 @@
 package net.smileycorp.mineplunder.entities;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.smileycorp.mineplunder.api.capability.MineplunderCapabilities;
 import net.smileycorp.mineplunder.api.capability.SpecialFire;
-import net.smileycorp.mineplunder.capability.InfernalSoulFire;
 import net.smileycorp.mineplunder.init.MineplunderBlocks;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 

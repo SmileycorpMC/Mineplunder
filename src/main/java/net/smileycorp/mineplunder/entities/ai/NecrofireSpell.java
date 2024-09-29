@@ -5,8 +5,6 @@ import net.minecraft.world.phys.Vec3;
 import net.smileycorp.atlas.api.util.DirectionUtils;
 import net.smileycorp.mineplunder.entities.NecrofireProjectile;
 import net.smileycorp.mineplunder.entities.Necromancer;
-import net.smileycorp.mineplunder.entities.Skelliger;
-import net.smileycorp.mineplunder.init.MineplunderEntities;
 
 public class NecrofireSpell extends NecromancerSpellGoal {
 

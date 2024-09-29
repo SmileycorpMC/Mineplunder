@@ -2,7 +2,6 @@ package net.smileycorp.mineplunder.client;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,7 +14,6 @@ import net.smileycorp.mineplunder.client.particle.NecroFlameProvider;
 import net.smileycorp.mineplunder.client.renderer.*;
 import net.smileycorp.mineplunder.client.renderer.model.InfernalSoulModel;
 import net.smileycorp.mineplunder.client.renderer.model.SkelligerModel;
-import net.smileycorp.mineplunder.entities.Necromancer;
 import net.smileycorp.mineplunder.init.MineplunderBlocks;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
 import net.smileycorp.mineplunder.init.MineplunderParticles;

@@ -1,7 +1,6 @@
 package net.smileycorp.mineplunder.entities.ai;
 
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.smileycorp.mineplunder.entities.Necromancer;
 
 import java.util.EnumSet;

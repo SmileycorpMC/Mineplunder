@@ -1,7 +1,5 @@
 package net.smileycorp.mineplunder.entities.ai;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.smileycorp.mineplunder.entities.Necromancer;
 import net.smileycorp.mineplunder.entities.NecromancerMinion;
