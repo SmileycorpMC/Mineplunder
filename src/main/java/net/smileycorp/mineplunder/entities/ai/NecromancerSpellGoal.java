@@ -20,7 +20,8 @@ public abstract class NecromancerSpellGoal extends Goal {
     }
 
     public boolean canUse() {
-        return !necromancer.isCastingSpell() && necromancer.getTarget() != null;
+        if (necromancer.getTarget() == null) return false;
+        return !necromancer.isCastingSpell() &! necromancer.getTarget().isDeadOrDying();
     }
 
     public boolean canContinueToUse() {

@@ -7,6 +7,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,7 +28,7 @@ public class Skelliger extends NecromancerMinion implements RangedAttackMob {
     public Skelliger(EntityType<? extends Skelliger> type, Level level) {
         super(type, level);
     }
-
+    
     protected void populateDefaultEquipmentSlots(RandomSource p_219154_, DifficultyInstance p_219155_) {
         switch (random.nextInt(6)) {
             case 0:
@@ -87,4 +90,9 @@ public class Skelliger extends NecromancerMinion implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {}
+    
+    public static AttributeSupplier.Builder createAttributes() {
+        return AbstractSkeleton.createAttributes().add(Attributes.MAX_HEALTH, 16);
+    }
+    
 }

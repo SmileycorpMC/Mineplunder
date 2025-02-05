@@ -73,8 +73,8 @@ public class Necromancer extends AbstractIllager {
         goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
         goalSelector.addGoal(2, new AvoidEntityGoal<>(this, IronGolem.class, 8.0F, 0.6D, 1.0D));
         goalSelector.addGoal(3, new DispelMinionsGoal(this));
-        goalSelector.addGoal(4, new SummonSkelligerSpell(this));
-        goalSelector.addGoal(5, new NecrofireSpell(this));
+        goalSelector.addGoal(4, new NecrofireSpell(this));
+        goalSelector.addGoal(5, new SummonSkelligerSpell(this));
         goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
         goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));

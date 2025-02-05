@@ -53,6 +53,10 @@ public class MineplunderEntities {
     public static final RegistryObject<EntityType<NecrofireProjectile>> NECROFIRE = ENTITIES.register("necrofire",
             ()->EntityType.Builder.<NecrofireProjectile>of(NecrofireProjectile::new, MobCategory.MISC).sized(1, 1)
                     .clientTrackingRange(4).updateInterval(10).build("necrofire"));
+    
+    public static final RegistryObject<EntityType<Wisp>> WISP = ENTITIES.register("wisp",
+            ()->EntityType.Builder.<Wisp>of(Wisp::new, MobCategory.MISC).sized(0.5f, 0.5f)
+                    .clientTrackingRange(4).updateInterval(10).build("wisp"));
 
     public static <T extends Mob> RegistryObject<EntityType<T>> register(String name, int foreground, int background, EntityType.Builder<T> builder) {
         RegistryObject<EntityType<T>> type = ENTITIES.register(name, ()->builder.build(name));
@@ -70,7 +74,7 @@ public class MineplunderEntities {
         event.put(INFERNAL_SOUL.get(), InfernalSoul.createAttributes().build());
         event.put(WITHERWIGHT.get(), AbstractSkeleton.createAttributes().build());
         event.put(NECROMANCER.get(), Evoker.createAttributes().build());
-        event.put(SKELLIGER.get(), AbstractSkeleton.createAttributes().build());
+        event.put(SKELLIGER.get(), Skelliger.createAttributes().build());
         event.put(MARAUDER.get(), Marauder.createAttributes().build());
     }
 

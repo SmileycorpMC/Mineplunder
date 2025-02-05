@@ -8,7 +8,7 @@ import net.smileycorp.mineplunder.entities.Skelliger;
 
 public class SummonSkelligerSpell extends NecromancerSpellGoal {
 
-    private final TargetingConditions targeting = TargetingConditions.forNonCombat().range(16.0D).ignoreLineOfSight()
+    private final TargetingConditions targeting = TargetingConditions.forNonCombat().range(32).ignoreLineOfSight()
             .ignoreInvisibilityTesting().selector(e->((Skelliger)e).getOwner() == necromancer);
 
     public SummonSkelligerSpell(Necromancer necromancer) {
@@ -16,8 +16,8 @@ public class SummonSkelligerSpell extends NecromancerSpellGoal {
     }
 
     public boolean canUse() {
-        return super.canUse() && necromancer.getRandom().nextInt(8) + 1 >
-                necromancer.level().getNearbyEntities(Skelliger.class, targeting, necromancer, necromancer.getBoundingBox().inflate(16.0D)).size();
+        return super.canUse() && necromancer.getRandom().nextInt(3) >
+                necromancer.level().getNearbyEntities(Skelliger.class, targeting, necromancer, necromancer.getBoundingBox().inflate(32)).size();
     }
 
     public void start() {
@@ -27,7 +27,7 @@ public class SummonSkelligerSpell extends NecromancerSpellGoal {
 
     public void tick() {
         super.tick();
-        if (useTicks == 5) for (int i = 0; i <= necromancer.getRandom().nextInt(4); i++) {
+        if (useTicks == 5) for (int i = 0; i <= necromancer.getRandom().nextInt(3); i++) {
             Skelliger skelliger = new Skelliger(necromancer.level());
             Vec3 dir = DirectionUtils.getRandomDirectionVecXZ(necromancer.getRandom());
             skelliger.setPos(DirectionUtils.getClosestLoadedPos(necromancer.level(), necromancer.position(), dir, 2.5));

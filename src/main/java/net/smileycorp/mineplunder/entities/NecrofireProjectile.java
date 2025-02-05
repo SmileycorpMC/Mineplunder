@@ -8,6 +8,7 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.smileycorp.mineplunder.api.capability.SpecialFire;
 import net.smileycorp.mineplunder.init.MineplunderBlocks;
 import net.smileycorp.mineplunder.init.MineplunderEntities;
@@ -20,11 +21,11 @@ public class NecrofireProjectile extends AbstractHurtingProjectile implements Fa
         super(type, level);
     }
 
-    public NecrofireProjectile(Entity owner, BlockPos pos) {
+    public NecrofireProjectile(Entity owner, Vec3 pos) {
        this(MineplunderEntities.NECROFIRE.get(), owner.level());
        setOwner(owner);
-       setPos(pos.getCenter());
-       startPos = pos;
+       setPos(pos);
+       startPos = BlockPos.containing(pos);
     }
 
     protected void onHitEntity(EntityHitResult p_37386_) {
@@ -32,14 +33,17 @@ public class NecrofireProjectile extends AbstractHurtingProjectile implements Fa
         if (!this.level().isClientSide) {
             Entity entity = p_37386_.getEntity();
             Entity owner = this.getOwner();
-            if (!owner.isAlliedTo(entity)) SpecialFire.setBurning(entity, 60, SpecialFire.FireType.NECROFIRE);
+            if (!owner.isAlliedTo(entity)) {
+                SpecialFire.setBurning(entity, 60, SpecialFire.FireType.NECROFIRE);
+                entity.push(0, 1, 0);
+            }
         }
     }
 
     public void tick() {
         super.tick();
         setDeltaMovement(0, 0.5*Math.sin(tickCount/2), 0);
-        if (this.tickCount >= 40) discard();
+        if (this.tickCount >= 10) discard();
     }
 
     public boolean isPickable() {
